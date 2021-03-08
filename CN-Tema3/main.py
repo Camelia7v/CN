@@ -24,11 +24,8 @@ with open("a.txt", 'r') as f:
     n = int(lines[0])
     m = methods.create_empty_list_of_lists(n)
     for i in range(2, 7108):
-        # for j in range(0, len(m[int(lines[i].split(',')[1])])):
-        #     if m[int(lines[i].split(',')[1])][j][1] == float(lines[i].split(',')[2]):
-        #         m[int(lines[i].split(',')[1])][j][0] += float(lines[i].split(',')[0])
-        #     else:
         m[int(lines[i].split(',')[1])].append((float(lines[i].split(',')[0]), int(lines[i].split(',')[2])))
+
 
 # cautare valori cu aceiasi indici
 # for linie in range(0, len(m)):
@@ -43,13 +40,14 @@ with open("a.txt", 'r') as f:
 #             nr1 += 1
 #     print(nr1)
 
-print("m: ", len(m), m)
 
 # eliminare valori cu aceiasi indici
 for linie in range(0, len(m)):
     for tupla in range(0, len(m[linie])-1):
         coloana = m[linie][tupla][1]
         for tupla_urm in range(tupla+1, len(m[linie])):
+            if tupla_urm == len(m[linie]):
+                break
             if m[linie][tupla_urm][1] == coloana:
                 y1 = list(m[linie][tupla])
                 y2 = list(m[linie][tupla_urm])
