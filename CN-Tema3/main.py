@@ -1,5 +1,6 @@
 import methods
 
+# memorare matricea b
 with open("b.txt", 'r') as f:
     lines = f.readlines()
     n = int(lines[0])
@@ -19,6 +20,7 @@ print("a: ", len(a), a, "\n")
 print("b: ", len(b), b, "\n")
 print("c: ", len(c), c, "\n")
 
+# memorare matricea a
 with open("a.txt", 'r') as f:
     lines = f.readlines()
     n = int(lines[0])
@@ -28,17 +30,17 @@ with open("a.txt", 'r') as f:
 
 
 # cautare valori cu aceiasi indici
-# for linie in range(0, len(m)):
-#     nr1 = 0
-#     for tupla in range(0, len(m[linie])-1):
-#         coloana = m[linie][tupla][1]
-#         nr = 0
-#         for tupla_urm in range(tupla+1, len(m[linie])):
-#             if m[linie][tupla_urm][1] == coloana:
-#                 nr += 1
-#         if nr > 0:
-#             nr1 += 1
-#     print(nr1)
+for linie in range(0, len(m)):
+    nr1 = 0
+    for tupla in range(0, len(m[linie])-1):
+        coloana = m[linie][tupla][1]
+        nr = 0
+        for tupla_urm in range(tupla+1, len(m[linie])):
+            if m[linie][tupla_urm][1] == coloana:
+                nr += 1
+        if nr > 0:
+            nr1 += 1
+    # print(nr1)
 
 
 # eliminare valori cu aceiasi indici
@@ -56,6 +58,18 @@ for linie in range(0, len(m)):
                 m[linie][tupla_urm] = tuple(y2)
                 m[linie].remove((m[linie][tupla_urm][0], m[linie][tupla_urm][1]))
 
-print("m: ", len(m), m)
+print("m: ", len(m), m, "\n")
 
+
+# am inceput adunarea matricelor A+B
+# am adunat la matricea din fisierul a.txt lista cu elementele de pe diagonala principala (lista a) din fisierul b.txt
+aplusb = list(m)
+for i in range(0, len(a)):
+    for j in range(0, len(aplusb[i])):
+        if m[i][j][1] == i:
+            x = list(aplusb[i][j])
+            x[0] += a[i]
+            aplusb[i][j] = tuple(x)
+
+print("A + B: ", aplusb)
 
