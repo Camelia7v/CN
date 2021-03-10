@@ -61,8 +61,8 @@ for linie in range(0, len(m)):
 print("m: ", len(m), m, "\n")
 
 
-# am inceput adunarea matricelor A+B
-# am adunat la matricea din fisierul a.txt lista cu elementele de pe diagonala principala (lista a) din fisierul b.txt
+# lipseste ceva
+# adunarea matricelor A+B
 aplusb = list(m)
 for i in range(0, len(a)):
     for j in range(0, len(aplusb[i])):
@@ -70,6 +70,23 @@ for i in range(0, len(a)):
             x = list(aplusb[i][j])
             x[0] += a[i]
             aplusb[i][j] = tuple(x)
+        if m[i][j][1] - i == q:
+            x = list(aplusb[i][j])
+            x[0] += b[i]
+            aplusb[i][j] = tuple(x)
+        if i - m[i][j][1] == p:
+            x = list(aplusb[i][j])
+            x[0] += c[i]
+            aplusb[i][j] = tuple(x)
 
-print("A + B: ", aplusb)
+print("A + B: ", "\n", aplusb, "\n")
 
+# memorare matricea aplusb
+with open("aplusb.txt", 'r') as f:
+    lines = f.readlines()
+    n = int(lines[0])
+    aplusb_din_fisier = methods.create_empty_list_of_lists(n)
+    for i in range(2, 11143):
+        aplusb_din_fisier[int(lines[i].split(',')[1])].append((float(lines[i].split(',')[0]), int(lines[i].split(',')[2])))
+
+print("A + B din fisier: ", "\n", aplusb_din_fisier)
