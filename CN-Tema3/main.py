@@ -79,10 +79,19 @@ for i in range(0, len(m)):
 
 
 for i in range(0, len(b)):
-    if len(aplusb[i]) < i:
-        aplusb[i].append((b[i], i+1))
-    elif aplusb[i][i+1][1] != i+1:
-        aplusb[i].append((b[i], i + 1))
+    if b[i] != 0.0 and i+1 < len(aplusb[i]):
+        if len(aplusb[i]) < i:
+             aplusb[i].append((b[i], i+1))
+        elif aplusb[i][i+1][1] != i+1:
+            aplusb[i].append((b[i], i + 1))
+
+
+for i in range(0, len(c)):
+    if c[i] != 0.0 and i+1 < len(aplusb[i]):
+        if len(aplusb[i]) < i:
+            aplusb[i+1].append((c[i], i))
+        elif aplusb[i-1][i][1] != i:
+            aplusb[i+1].append((c[i], i))
 
 # for i in range(0, len(c)):
 #     if len(aplusb[i]) < i:
@@ -104,3 +113,11 @@ with open("aplusbTestCase.txt", 'r') as f:
             (float(lines[i].split(',')[0]), int(lines[i].split(',')[2])))
 
 print("A + B din fisier: ", "\n", aplusb_din_fisier)
+
+
+#inmultire
+#linie*coloana
+#vector din m
+#0,0 a,c
+#1,0,1 a,b,c
+#n,n a,b
