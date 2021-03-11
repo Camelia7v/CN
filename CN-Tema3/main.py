@@ -8,13 +8,13 @@ with open("bTestCase.txt", 'r') as f:
     p = int(lines[1])
     q = int(lines[2])
     a = list()
-    for i in range(4, n+4):
+    for i in range(4, n + 4):
         a.append(float(lines[i][:-1]))
     b = list()
-    for i in range(n+5, n+5+n-1):
+    for i in range(n + 5, n + 5 + n - 1):
         b.append(float(lines[i][:-1]))
     c = list()
-    for i in range(n+5+n-1+1, n+5+n-1+1+n-1):
+    for i in range(n + 5 + n - 1 + 1, n + 5 + n - 1 + 1 + n - 1):
         c.append(float(lines[i][:-1]))
 
 print("a: ", len(a), a, "\n")
@@ -27,29 +27,27 @@ with open("aTestCase.txt", 'r') as f:
     lines = f.readlines()
     n = int(lines[0])
     m = methods.create_empty_list_of_lists(n)
-    for i in range(2, 13):  # 7108):
+    for i in range(2, 14):  # 7108):
         m[int(lines[i].split(',')[1])].append((float(lines[i].split(',')[0]), int(lines[i].split(',')[2])))
-
 
 # cautare valori cu aceiasi indici
 for linie in range(0, len(m)):
     nr1 = 0
-    for tupla in range(0, len(m[linie])-1):
+    for tupla in range(0, len(m[linie]) - 1):
         coloana = m[linie][tupla][1]
         nr = 0
-        for tupla_urm in range(tupla+1, len(m[linie])):
+        for tupla_urm in range(tupla + 1, len(m[linie])):
             if m[linie][tupla_urm][1] == coloana:
                 nr += 1
         if nr > 0:
             nr1 += 1
     # print(nr1)
 
-
 # eliminare valori cu aceiasi indici
 for linie in range(0, len(m)):
-    for tupla in range(0, len(m[linie])-1):
+    for tupla in range(0, len(m[linie]) - 1):
         coloana = m[linie][tupla][1]
-        for tupla_urm in range(tupla+1, len(m[linie])):
+        for tupla_urm in range(tupla + 1, len(m[linie])):
             if tupla_urm == len(m[linie]):
                 break
             if m[linie][tupla_urm][1] == coloana:
@@ -62,8 +60,6 @@ for linie in range(0, len(m)):
 
 print("m: ", len(m), m, "\n")
 
-
-# lipseste ceva
 # adunarea matricelor A+B
 aplusb = list(m)
 for i in range(0, len(m)):
@@ -82,14 +78,18 @@ for i in range(0, len(m)):
             aplusb[i][j] = tuple(x)
 
 
-def search_in_matrix(i, param):
-    pass
+for i in range(0, len(b)):
+    if len(aplusb[i]) < i:
+        aplusb[i].append((b[i], i+1))
+    elif aplusb[i][i+1][1] != i+1:
+        aplusb[i].append((b[i], i + 1))
 
+# for i in range(0, len(c)):
+#     if len(aplusb[i]) < i:
+#         aplusb[i+1].append((c[i], i))
+#     elif aplusb[i+1][i][1] != i:
+#         aplusb[i+1].append((c[i], i))
 
-for i in range(0, len(a)):
-    for j in range(0, len(aplusb[i])):
-        if search_in_matrix(i, aplusb[i][j]):
-            aplusb[i].append((a[i], i))
 
 print("A + B: ", "\n", aplusb, "\n")
 
@@ -100,6 +100,7 @@ with open("aplusbTestCase.txt", 'r') as f:
     n = int(lines[0])
     aplusb_din_fisier = methods.create_empty_list_of_lists(n)
     for i in range(2, 18):  # 11143):
-        aplusb_din_fisier[int(lines[i].split(',')[1])].append((float(lines[i].split(',')[0]), int(lines[i].split(',')[2])))
+        aplusb_din_fisier[int(lines[i].split(',')[1])].append(
+            (float(lines[i].split(',')[0]), int(lines[i].split(',')[2])))
 
 print("A + B din fisier: ", "\n", aplusb_din_fisier)
