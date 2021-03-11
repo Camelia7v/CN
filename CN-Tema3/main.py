@@ -1,12 +1,12 @@
 import methods
 
 # memorare matricea b
-with open("b.txt", 'r') as f:
-# with open("bTestCase.txt", 'r') as f:
+# with open("b.txt", 'r') as f:
+with open("bTestCase.txt", 'r') as f:
     lines = f.readlines()
     n = int(lines[0])
     p = int(lines[1])
-    q = int(lines[1])
+    q = int(lines[2])
     a = list()
     for i in range(4, n+4):
         a.append(float(lines[i][:-1]))
@@ -22,12 +22,12 @@ print("b: ", len(b), b, "\n")
 print("c: ", len(c), c, "\n")
 
 # memorare matricea a
-with open("a.txt", 'r') as f:
-# with open("aTestCase.txt", 'r') as f:
+# with open("a.txt", 'r') as f:
+with open("aTestCase.txt", 'r') as f:
     lines = f.readlines()
     n = int(lines[0])
     m = methods.create_empty_list_of_lists(n)
-    for i in range(2, 7108):
+    for i in range(2, 13):  # 7108):
         m[int(lines[i].split(',')[1])].append((float(lines[i].split(',')[0]), int(lines[i].split(',')[2])))
 
 
@@ -78,20 +78,28 @@ for i in range(0, len(m)):
             aplusb[i][j] = tuple(x)
         if i - m[i][j][1] == p:
             x = list(aplusb[i][j])
-            x[0] += c[i]
+            x[0] += c[m[i][j][1]]
             aplusb[i][j] = tuple(x)
+
+
+def search_in_matrix(i, param):
+    pass
+
+
+for i in range(0, len(a)):
+    for j in range(0, len(aplusb[i])):
+        if search_in_matrix(i, aplusb[i][j]):
+            aplusb[i].append((a[i], i))
 
 print("A + B: ", "\n", aplusb, "\n")
 
 # memorare matricea aplusb
-with open("aplusb.txt", 'r') as f:
-# with open("aplusbTestCase.txt", 'r') as f:
+# with open("aplusb.txt", 'r') as f:
+with open("aplusbTestCase.txt", 'r') as f:
     lines = f.readlines()
     n = int(lines[0])
     aplusb_din_fisier = methods.create_empty_list_of_lists(n)
-    for i in range(2, 11143):
+    for i in range(2, 18):  # 11143):
         aplusb_din_fisier[int(lines[i].split(',')[1])].append((float(lines[i].split(',')[0]), int(lines[i].split(',')[2])))
 
 print("A + B din fisier: ", "\n", aplusb_din_fisier)
-# [(143.25, 0), (7.0, 1110), (17.0, 15), (8.0, 245)], [(24.5, 626), (21.0, 878), (161.0, 1), (1.0, 187), (3.5, 937)]
-# [(143.25, 0), (7.0, 1110), (3.0, 1), (17.0, 15), (8.0, 245)], [(1.75, 0), (4.75, 2), (24.5, 626), (21.0, 878), (161.0, 1), (1.0, 187), (3.5, 937)]
