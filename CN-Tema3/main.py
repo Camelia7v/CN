@@ -2,6 +2,7 @@ import methods
 
 # memorare matricea b
 with open("b.txt", 'r') as f:
+# with open("bTestCase.txt", 'r') as f:
     lines = f.readlines()
     n = int(lines[0])
     p = int(lines[1])
@@ -22,6 +23,7 @@ print("c: ", len(c), c, "\n")
 
 # memorare matricea a
 with open("a.txt", 'r') as f:
+# with open("aTestCase.txt", 'r') as f:
     lines = f.readlines()
     n = int(lines[0])
     m = methods.create_empty_list_of_lists(n)
@@ -64,7 +66,7 @@ print("m: ", len(m), m, "\n")
 # lipseste ceva
 # adunarea matricelor A+B
 aplusb = list(m)
-for i in range(0, len(a)):
+for i in range(0, len(m)):
     for j in range(0, len(aplusb[i])):
         if m[i][j][1] == i:
             x = list(aplusb[i][j])
@@ -83,6 +85,7 @@ print("A + B: ", "\n", aplusb, "\n")
 
 # memorare matricea aplusb
 with open("aplusb.txt", 'r') as f:
+# with open("aplusbTestCase.txt", 'r') as f:
     lines = f.readlines()
     n = int(lines[0])
     aplusb_din_fisier = methods.create_empty_list_of_lists(n)
@@ -90,3 +93,5 @@ with open("aplusb.txt", 'r') as f:
         aplusb_din_fisier[int(lines[i].split(',')[1])].append((float(lines[i].split(',')[0]), int(lines[i].split(',')[2])))
 
 print("A + B din fisier: ", "\n", aplusb_din_fisier)
+# [(143.25, 0), (7.0, 1110), (17.0, 15), (8.0, 245)], [(24.5, 626), (21.0, 878), (161.0, 1), (1.0, 187), (3.5, 937)]
+# [(143.25, 0), (7.0, 1110), (3.0, 1), (17.0, 15), (8.0, 245)], [(1.75, 0), (4.75, 2), (24.5, 626), (21.0, 878), (161.0, 1), (1.0, 187), (3.5, 937)]
