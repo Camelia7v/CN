@@ -26,98 +26,94 @@ print("c: ", len(c), c, "\n")
 with open("aTestCase.txt", 'r') as f:
     lines = f.readlines()
     n = int(lines[0])
-    m = methods.create_empty_list_of_lists(n)
+    m = methods.create_empty_list_of_dicts(n)
     for i in range(2, 14):  # 7108):
-        m[int(lines[i].split(',')[1])].append((float(lines[i].split(',')[0]), int(lines[i].split(',')[2])))
-
-# cautare valori cu aceiasi indici
-for linie in range(0, len(m)):
-    nr1 = 0
-    for tupla in range(0, len(m[linie]) - 1):
-        coloana = m[linie][tupla][1]
-        nr = 0
-        for tupla_urm in range(tupla + 1, len(m[linie])):
-            if m[linie][tupla_urm][1] == coloana:
-                nr += 1
-        if nr > 0:
-            nr1 += 1
-    # print(nr1)
-
-# eliminare valori cu aceiasi indici
-for linie in range(0, len(m)):
-    for tupla in range(0, len(m[linie]) - 1):
-        coloana = m[linie][tupla][1]
-        for tupla_urm in range(tupla + 1, len(m[linie])):
-            if tupla_urm == len(m[linie]):
-                break
-            if m[linie][tupla_urm][1] == coloana:
-                y1 = list(m[linie][tupla])
-                y2 = list(m[linie][tupla_urm])
-                y1[0] += y2[0]
-                m[linie][tupla] = tuple(y1)
-                m[linie][tupla_urm] = tuple(y2)
-                m[linie].remove((m[linie][tupla_urm][0], m[linie][tupla_urm][1]))
+        if int(lines[i].split(',')[2]) in m[int(lines[i].split(',')[1])]:
+            aux = m[int(lines[i].split(',')[1])].get(int(lines[i].split(',')[2]))
+            m[int(lines[i].split(',')[1])][int(lines[i].split(',')[2])] = aux + float(lines[i].split(',')[0])
+        else:
+            m[int(lines[i].split(',')[1])][int(lines[i].split(',')[2])] = float(lines[i].split(',')[0])
 
 print("m: ", len(m), m, "\n")
 
 # adunarea matricelor A+B
 aplusb = list(m)
-for i in range(0, len(m)):
-    for j in range(0, len(aplusb[i])):
-        if m[i][j][1] == i:
-            x = list(aplusb[i][j])
-            x[0] += a[i]
-            aplusb[i][j] = tuple(x)
-        if m[i][j][1] - i == q:
-            x = list(aplusb[i][j])
-            x[0] += b[i]
-            aplusb[i][j] = tuple(x)
-        if i - m[i][j][1] == p:
-            x = list(aplusb[i][j])
-            x[0] += c[m[i][j][1]]
-            aplusb[i][j] = tuple(x)
+for i in range(0, len(aplusb)):
+    for j in aplusb[i].keys():
+        # print(j)
+        if i == j:
+            # print(i, j)
+            aux = aplusb[i].get(j)
+            aplusb[i][j] = aux + a[i]
+        if j - i == q:
+            aux = aplusb[i].get(j)
+            aplusb[i][j] = aux + b[i]
+        if i - j == p:
+            aux = aplusb[i].get(j)
+            aplusb[i][j] = aux + c[j]
 
+for i in range(0, len(a)):
+    for j in aplusb[i].keys():
+        if i != j and i not in aplusb[i] and a[i] != 0.0:
+            aplusb[i][i] = a[i]
+            break
 
 for i in range(0, len(b)):
-    if b[i] != 0.0 and i+1 < len(aplusb[i]):
-        if len(aplusb[i]) < i:
-             aplusb[i].append((b[i], i+1))
-        elif aplusb[i][i+1][1] != i+1:
-            aplusb[i].append((b[i], i + 1))
-
+    for j in aplusb[i].keys():
+        if i + 1 != j and i + 1 not in aplusb[i] and b[i] != 0.0:
+            aplusb[i][i + 1] = b[i]
+            break
 
 for i in range(0, len(c)):
-    if c[i] != 0.0 and i+1 < len(aplusb[i]):
-        if len(aplusb[i]) < i:
-            aplusb[i+1].append((c[i], i))
-        elif aplusb[i-1][i][1] != i:
-            aplusb[i+1].append((c[i], i))
-
-# for i in range(0, len(c)):
-#     if len(aplusb[i]) < i:
-#         aplusb[i+1].append((c[i], i))
-#     elif aplusb[i+1][i][1] != i:
-#         aplusb[i+1].append((c[i], i))
-
+    for j in aplusb[i + 1].keys():
+        if i != j and i not in aplusb[i + 1] and c[i] != 0.0:
+            aplusb[i + 1][i] = c[i]
+            break
 
 print("A + B: ", "\n", aplusb, "\n")
+
+# sortare apusb
+sorted_aplusb = methods.sort_matrix(aplusb)
+
+print("sorted A + B", "\n", sorted_aplusb, "\n")
+
 
 # memorare matricea aplusb
 # with open("aplusb.txt", 'r') as f:
 with open("aplusbTestCase.txt", 'r') as f:
     lines = f.readlines()
     n = int(lines[0])
-    aplusb_din_fisier = methods.create_empty_list_of_lists(n)
+    aplusb_din_fisier = methods.create_empty_list_of_dicts(n)
     for i in range(2, 18):  # 11143):
-        aplusb_din_fisier[int(lines[i].split(',')[1])].append(
-            (float(lines[i].split(',')[0]), int(lines[i].split(',')[2])))
+        aplusb_din_fisier[int(lines[i].split(',')[1])][int(lines[i].split(',')[2])] = float(lines[i].split(',')[0])
 
 print("A + B din fisier: ", "\n", aplusb_din_fisier)
 
 
-#inmultire
-#linie*coloana
-#vector din m
-#0,0 a,c
-#1,0,1 a,b,c
-#n,n a,b
+#verificare
+methods.equal(aplusb_din_fisier, sorted_aplusb)
+
+
+
+# inmultirea matricelor A * B
+# linie*coloana
+# vector din m
+# 0,0 a,c
+# 1,0,1 a,b,c
+# n,n a,b
+
+aorib = list(m)
+# for i in range(0, len(aorib)):
+#     for j in range(0, len(aorib[i])):
+
+
+
+# memorare matricea aorib
+with open("aoribTestCase.txt", 'r') as f:
+    lines = f.readlines()
+    n = int(lines[0])
+    aorib_din_fisier = methods.create_empty_list_of_dicts(n)
+    for i in range(2, 23):
+        aorib_din_fisier[int(lines[i].split(',')[1])][int(lines[i].split(',')[2])] = float(lines[i].split(',')[0])
+
+print("A * B din fisier: ", "\n", aorib_din_fisier)
