@@ -1,3 +1,5 @@
+import copy
+
 import methods
 
 # memorare matricea b
@@ -37,7 +39,9 @@ with open("aTestCase.txt", 'r') as f:
 print("m: ", len(m), m, "\n")
 
 # adunarea matricelor A+B
-aplusb = list(m)
+
+
+aplusb = copy.deepcopy(m)
 for i in range(0, len(aplusb)):
     for j in aplusb[i].keys():
         # print(j)
@@ -94,20 +98,6 @@ print("A + B din fisier: ", "\n", aplusb_din_fisier)
 methods.equal(aplusb_din_fisier, sorted_aplusb)
 
 
-
-# inmultirea matricelor A * B
-# linie*coloana
-# vector din m
-# 0,0 a,c
-# 1,0,1 a,b,c
-# n,n a,b
-
-aorib = list(m)
-# for i in range(0, len(aorib)):
-#     for j in range(0, len(aorib[i])):
-
-
-
 # memorare matricea aorib
 with open("aoribTestCase.txt", 'r') as f:
     lines = f.readlines()
@@ -116,4 +106,63 @@ with open("aoribTestCase.txt", 'r') as f:
     for i in range(2, 23):
         aorib_din_fisier[int(lines[i].split(',')[1])][int(lines[i].split(',')[2])] = float(lines[i].split(',')[0])
 
+
+
+# inmultirea matricelor A * B
+# linie*coloana
+# vector din m
+# 0,0 a,c
+# 1,0,1 a,b,c
+# n,n a,b
+
+aorib = copy.deepcopy(m)
+aorib = methods.sort_matrix(aorib)
+m1 = methods.create_empty_list_of_dicts(n)
+for i in range(0,len(m1)):
+    for j in range(0,len(m1)):
+        if i==j:
+            m1[i][j]=a[i]
+        if j-i==q:
+            m1[i][j]=b[i]
+        if i-j==p:
+            m1[i][j]=c[j]
+print(" A: ", "\n",m)
+print(" B: ", "\n",m1)
+
+for i in range(0, len(aorib)):
+    for j in m1[i].keys():
+        for k in range(0,len(m1[i])):
+            if k in aorib[i] and j in aorib[i] and j in m1[k]:
+                aorib[i][j] += aorib[i][k]*m1[k][j]
+
+#         if i==j:
+#             aorib[i][j]=aorib[i][j]*m1[i][j]
+#         if j-i==q:
+#             aorib[i][j]=aorib[i][j]*m1[i][i+1]
+#         if i-j==p:
+#             aorib[i][j]=aorib[i][j]*m1[i][i-1]
+#
+#
+# # iterate through rows of X
+# for i in range(len(X)):
+#    # iterate through columns of Y
+#    for j in range(len(Y[0])):
+#        # iterate through rows of Y
+#        for k in range(len(Y)):
+#            result[i][j] += X[i][k] * Y[k][j]
+
+# [{0: 102.5, 2: 2.5}, {0: 3.5, 1: 104.88, 2: 1.05, 4: 0.33}, {2: 100.0}, {1: 1.3, 3: 101.3}, {0: 0.73, 3: 1.5, 4: 102.23}]
+# [{0: 102.5, 1: 2.5},
+#  {0: 3.5, 1: 104.88, 2: 1.05},
+#  {1: 1.3, 2: 100.0, 3: 0.33},
+#  {2: 0.73, 3: 101.3, 4: 0.0},
+#  {3: 1.5, 4: 102.23}]
+
+
+
+
+
+print("A * B: ", "\n",aorib)
 print("A * B din fisier: ", "\n", aorib_din_fisier)
+
+
