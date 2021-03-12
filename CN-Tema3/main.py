@@ -40,9 +40,7 @@ print("m: ", len(m), m, "\n")
 aplusb = list(m)
 for i in range(0, len(aplusb)):
     for j in aplusb[i].keys():
-        # print(j)
         if i == j:
-            # print(i, j)
             aux = aplusb[i].get(j)
             aplusb[i][j] = aux + a[i]
         if j - i == q:
@@ -77,7 +75,6 @@ sorted_aplusb = methods.sort_matrix(aplusb)
 
 print("sorted A + B", "\n", sorted_aplusb, "\n")
 
-
 # memorare matricea aplusb
 # with open("aplusb.txt", 'r') as f:
 with open("aplusbTestCase.txt", 'r') as f:
@@ -89,11 +86,8 @@ with open("aplusbTestCase.txt", 'r') as f:
 
 print("A + B din fisier: ", "\n", aplusb_din_fisier)
 
-
-#verificare
+# verificare
 methods.equal(aplusb_din_fisier, sorted_aplusb)
-
-
 
 # inmultirea matricelor A * B
 # linie*coloana
@@ -105,7 +99,6 @@ methods.equal(aplusb_din_fisier, sorted_aplusb)
 aorib = list(m)
 # for i in range(0, len(aorib)):
 #     for j in range(0, len(aorib[i])):
-
 
 
 # memorare matricea aorib
