@@ -1,3 +1,5 @@
+import copy
+
 import methods
 
 # memorare matricea b
@@ -37,7 +39,9 @@ with open("aTestCase.txt", 'r') as f:
 print("m: ", len(m), m, "\n")
 
 # adunarea matricelor A+B
-aplusb = list(m)
+
+
+aplusb = copy.deepcopy(m)
 for i in range(0, len(aplusb)):
     for j in aplusb[i].keys():
         if i == j:
@@ -89,17 +93,46 @@ print("A + B din fisier: ", "\n", aplusb_din_fisier)
 # verificare
 methods.equal(aplusb_din_fisier, sorted_aplusb)
 
+
 # inmultirea matricelor A * B
-# linie*coloana
-# vector din m
-# 0,0 a,c
-# 1,0,1 a,b,c
-# n,n a,b
+aorib = copy.deepcopy(m)
+aorib = methods.sort_matrix(aorib)
+m1 = methods.create_empty_list_of_dicts(n)
+for i in range(0, len(m1)):
+    for j in range(0, len(m1)):
+        if i == j:
+            m1[i][j] = a[i]
+        if j - i == q:
+            m1[i][j] = b[i]
+        if i - j == p:
+            m1[i][j] = c[j]
+print(" A: ", "\n", m)
+print(" B: ", "\n", m1)
 
-aorib = list(m)
-# for i in range(0, len(aorib)):
-#     for j in range(0, len(aorib[i])):
+for i in range(0, len(aorib)):
+    for j in m1[i].keys():
+        for k in range(0, len(m1[i])):
+            if k in aorib[i] and j in aorib[i] and j in m1[k]:
+                aorib[i][j] += aorib[i][k] * m1[k][j]
 
+#         if i==j:
+#             aorib[i][j]=aorib[i][j]*m1[i][j]
+#         if j-i==q:
+#             aorib[i][j]=aorib[i][j]*m1[i][i+1]
+#         if i-j==p:
+#             aorib[i][j]=aorib[i][j]*m1[i][i-1]
+#
+#
+# # iterate through rows of X
+# for i in range(len(X)):
+#    # iterate through columns of Y
+#    for j in range(len(Y[0])):
+#        # iterate through rows of Y
+#        for k in range(len(Y)):
+#            result[i][j] += X[i][k] * Y[k][j]
+
+
+print("A * B: ", "\n", aorib)
 
 # memorare matricea aorib
 with open("aoribTestCase.txt", 'r') as f:
