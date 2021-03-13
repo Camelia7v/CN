@@ -87,8 +87,8 @@ with open("aplusb.txt", 'r') as f:
 
 print("A + B din fisier: ", "\n", aplusb_din_fisier)
 
-# verificare
-methods.equal(aplusb_din_fisier, sorted_aplusb)
+# verificare adunare
+verificare1=methods.equal(aplusb_din_fisier, sorted_aplusb)
 
 
 # inmultirea matricelor A * B
@@ -180,4 +180,8 @@ with open("aorib.txt", 'r') as f:
 
 print("A * B din fisier: ", "\n", aorib_din_fisier)
 
-methods.equal(aorib, aorib_din_fisier)
+verificare2=methods.equal(aorib, aorib_din_fisier)
+
+methods.gui_interface_citire("Citirea matricilor rare","Matricea A","Cei 3 vectori ai matricii B",m,(a,b,c))
+methods.gui_interface_operatii("Adunarea matricilor rare","Matricea A+B","Rezultatul din fisier",aplusb,aplusb_din_fisier,verificare1)
+methods.gui_interface_operatii("Inmultirea matricilor rare","Matricea A*B","Rezultatul din fisier",aorib,aorib_din_fisier,verificare2)
