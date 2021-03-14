@@ -20,10 +20,10 @@ def equal(A, B):
         if verifying_two_dictionaries(B[i], A[i]) is False:
             count += 1
     if count > 0:
-        mesaj="Matricele NU sunt egale!"
+        mesaj = "Matricele NU sunt egale!"
         print("\n", "Matricele NU sunt egale!", "\n")
     else:
-        mesaj="Matricele SUNT egale!"
+        mesaj = "Matricele SUNT egale!"
         print("\n", "Matricele sunt egale!", "\n")
     return mesaj
 
@@ -36,12 +36,14 @@ def sort_matrix(a):
     return sorted_aplusb
 
 
-def gui_interface_citire(text_ex=None,message1=None,message2=None,value1=None,value2=None):
+def gui_interface_citire(text_ex=None, message1=None, message2=None, value1=None, value2=None):
     sg.theme('DarkPurple')
     layout = [[sg.Text(message1, justification='center')],
-              [sg.Multiline(size=(105, 10), default_text=str(value1),font='courier 10', background_color='black', text_color='white')],
+              [sg.Multiline(size=(105, 10), default_text=str(value1), font='courier 10', background_color='black',
+                            text_color='white')],
               [sg.Text(message2, justification='center')],
-              [sg.Multiline(size=(105, 5), default_text="Vector a:"+str(value2[0]),font='courier 10', background_color='black', text_color='white')],
+              [sg.Multiline(size=(105, 5), default_text="Vector a:" + str(value2[0]), font='courier 10',
+                            background_color='black', text_color='white')],
               [sg.Multiline(size=(105, 5), default_text="Vector b:" + str(value2[1]), font='courier 10',
                             background_color='black', text_color='white')],
               [sg.Multiline(size=(105, 5), default_text="Vector c:" + str(value2[2]), font='courier 10',
@@ -60,10 +62,12 @@ def gui_interface_citire(text_ex=None,message1=None,message2=None,value1=None,va
             break
     window.close()
 
-def gui_interface_operatii(text_ex=None,message1=None,message2=None,value1=None,value2=None,verificare=None):
+
+def gui_interface_operatii(text_ex=None, message1=None, message2=None, value1=None, value2=None, verificare=None):
     sg.theme('DarkPurple')
     layout = [[sg.Text(message1, justification='center')],
-              [sg.Multiline(size=(105, 10), default_text=str(value1),font='courier 10', background_color='black', text_color='white')],
+              [sg.Multiline(size=(105, 10), default_text=str(value1), font='courier 10', background_color='black',
+                            text_color='white')],
               [sg.Text(message2, justification='center')],
               [sg.Multiline(size=(105, 10), default_text=str(value2), font='courier 10', background_color='black',
                             text_color='white')],
