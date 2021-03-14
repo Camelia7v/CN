@@ -1,3 +1,6 @@
+import math
+epsilon = 10 **(-13)
+
 def create_empty_list_of_dicts(n):
     return [{} for i in range(0, n)]
 
@@ -17,8 +20,11 @@ def read_matrix_from_file(filename):
         c = list()
         for i in range(n + 5 + n - 1 + 1, n + 5 + n - 1 + 1 + n - 1):
             c.append(float(lines[i][:-1]))
-    matrix=list(a,b,c)
-    return (matrix,p,q)
+    matrix = list()
+    matrix.append(a)
+    matrix.append(c)
+    matrix.append(b)
+    return (n,p,q,matrix)
 
 
 def convert_vectors_in_sparse_matrix(a, b, c, n, q, p):
@@ -41,3 +47,4 @@ def read_vector_from_file(filename):
         for i in range(2, n+2):
             a.append(float(lines[i]))
         return a
+
