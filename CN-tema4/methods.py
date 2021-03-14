@@ -48,3 +48,24 @@ def read_vector_from_file(filename):
             a.append(float(lines[i]))
         return a
 
+def check_diagonala(a):
+    not_zero = 0
+    for i in range(len(a)):
+        if abs(a[i]) < epsilon:
+            not_zero=1
+    if not_zero == 1:
+        return "STOP"
+    else:
+        return "GO"
+
+def verificare_posibilitate_calul(matrix):
+    verificare = list()
+    for vec in matrix:
+        verificare.append(check_diagonala(vec))
+    if "STOP" in verificare:
+        print("Nu se poate calcula solutia.Diagonala cu elemente zero")
+        exit()
+    else:
+        return
+
+

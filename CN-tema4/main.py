@@ -36,5 +36,12 @@ f5=methods.read_vector_from_file(f5_filename)
 # memorare matricea b
 
 print(a1)
-x = [j for j in range(n1)]
+#verificare diagonale
+methods.verificare_posibilitate_calul(a1)
+#initiere vector x
+x = [0.0 for j in range(n1)]
+def gauss_seidel(a, f):
+    pass
 
+def xG_solutie(a, f, x, n):
+    pass
