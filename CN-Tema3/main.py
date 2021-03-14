@@ -23,8 +23,8 @@ print("b: ", len(b), b, "\n")
 print("c: ", len(c), c, "\n")
 
 # memorare matricea a
-with open("a.txt", 'r') as f:
 # with open("aTestCase.txt", 'r') as f:
+with open("a.txt", 'r') as f:
     lines = f.readlines()
     n = int(lines[0])
     m = methods.create_empty_list_of_dicts(n)
