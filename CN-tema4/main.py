@@ -1,3 +1,6 @@
+import math
+import methods
+epsilon = 10 **(-13)
 a1_filename="files/a1.txt"
 a2_filename="files/a2.txt"
 a3_filename="files/a3.txt"
@@ -9,13 +12,13 @@ f2_filename="files/f2.txt"
 f3_filename="files/f3.txt"
 f4_filename="files/f4.txt"
 f5_filename="files/f5.txt"
-import methods
-epsilon = 10 **(-13)
-a1=methods.read_matrix_from_file(a1_filename)[0]
-a2=methods.read_matrix_from_file(a2_filename)[0]
-a3=methods.read_matrix_from_file(a3_filename)[0]
-a4=methods.read_matrix_from_file(a4_filename)[0]
-a5=methods.read_matrix_from_file(a5_filename)[0]
+
+a1=methods.read_matrix_from_file(a1_filename)[3]
+n1=methods.read_matrix_from_file(a1_filename)[0]
+a2=methods.read_matrix_from_file(a2_filename)[3]
+a3=methods.read_matrix_from_file(a3_filename)[3]
+a4=methods.read_matrix_from_file(a4_filename)[3]
+a5=methods.read_matrix_from_file(a5_filename)[3]
 
 f1=methods.read_vector_from_file(f1_filename)
 f2=methods.read_vector_from_file(f2_filename)
@@ -33,5 +36,12 @@ f5=methods.read_vector_from_file(f5_filename)
 # memorare matricea b
 
 print(a1)
+#verificare diagonale
+methods.verificare_posibilitate_calul(a1)
+#initiere vector x
+x = [0.0 for j in range(n1)]
+def gauss_seidel(a, f):
+    pass
 
-
+def xG_solutie(a, f, x, n):
+    pass

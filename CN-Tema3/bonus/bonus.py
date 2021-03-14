@@ -6,7 +6,6 @@ matrice: (pA, qA) şi (pB, qB).
 
 import methods
 
-
 # n,p,q,[a,b,c]
 set_matrix1 = methods.read_matrix_from_file("bTestCase.txt")
 set_matrix2 = methods.read_matrix_from_file("bTestCase.txt")
@@ -23,15 +22,36 @@ matrix_rezultat = methods.read_matrix("inmTestCase.txt")
 a = list()
 b = list()
 c = list()
+aux = 0.0
 
 # indiferent de q si p, vectorii a vor contine mereu diagonalele principale
 for i in range(0, len(matrix1[0])):
     for j in range(0, len(matrix2[0])):
         aux = matrix1[0][i] * matrix2[0][j]
     a.append(aux)
+aux = 0.0
+# ISSUE p1==q1 si p2==q2, DAR p1,p2 si respectiv q1,q2 POT fi diferite intre ele
+# celelalte diagonale in functie de p si q
+for i in range(0, len(matrix1[1])):
+    for j in range(0, len(matrix2[1])):
+        if i - j == p1:
+            aux = matrix1[1][i] * matrix2[1][j]
+        if j - i == q1:
+            aux = matrix1[1][i] * matrix2[1][j - 1]
+    b.append(aux)
+aux = 0.0
 
-# rezultat=methods.convert_vectors_in_sparse_matrix(a,b,c,n1,q1,q2)
+for i in range(0, len(matrix1[2])):
+    for j in range(0, len(matrix2[2])):
+        if i - j == p2:
+            aux = matrix1[1][i] * matrix2[2][j]
+        if j - i == q2:
+            aux = matrix1[2][i] * matrix2[2][j - 1]
+    c.append(aux)
+rezultat = methods.convert_vectors_in_sparse_matrix(a, b, c, n1, q1, q2)
 
 print("Matricea din fisier : ", matrix_rezultat)
-# print("Matricea obtinuta : " ,rezultat)
-print("Matricea obtinuta : ", a)
+print("a : ", a)
+print("b : ", b)
+print("c : ", c)
+print("Matricea obtinuta : ", rezultat)

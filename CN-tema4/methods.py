@@ -1,3 +1,6 @@
+import math
+epsilon = 10 **(-13)
+
 def create_empty_list_of_dicts(n):
     return [{} for i in range(0, n)]
 
@@ -17,8 +20,11 @@ def read_matrix_from_file(filename):
         c = list()
         for i in range(n + 5 + n - 1 + 1, n + 5 + n - 1 + 1 + n - 1):
             c.append(float(lines[i][:-1]))
-    matrix=list(a,b,c)
-    return (matrix,p,q)
+    matrix = list()
+    matrix.append(a)
+    matrix.append(c)
+    matrix.append(b)
+    return (n,p,q,matrix)
 
 
 def convert_vectors_in_sparse_matrix(a, b, c, n, q, p):
@@ -41,3 +47,25 @@ def read_vector_from_file(filename):
         for i in range(2, n+2):
             a.append(float(lines[i]))
         return a
+
+def check_diagonala(a):
+    not_zero = 0
+    for i in range(len(a)):
+        if abs(a[i]) < epsilon:
+            not_zero=1
+    if not_zero == 1:
+        return "STOP"
+    else:
+        return "GO"
+
+def verificare_posibilitate_calul(matrix):
+    verificare = list()
+    for vec in matrix:
+        verificare.append(check_diagonala(vec))
+    if "STOP" in verificare:
+        print("Nu se poate calcula solutia.Diagonala cu elemente zero")
+        exit()
+    else:
+        return
+
+
