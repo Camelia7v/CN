@@ -1,5 +1,5 @@
-
 import PySimpleGUI as sg
+
 
 def create_empty_list_of_dicts(n):
     return [{} for i in range(0, n)]

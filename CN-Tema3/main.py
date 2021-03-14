@@ -3,7 +3,7 @@ import methods
 
 # memorare matricea b
 with open("b.txt", 'r') as f:
-# with open("bTestCase.txt", 'r') as f:
+    # with open("bTestCase.txt", 'r') as f:
     lines = f.readlines()
     n = int(lines[0])
     p = int(lines[1])
@@ -28,7 +28,7 @@ with open("a.txt", 'r') as f:
     lines = f.readlines()
     n = int(lines[0])
     m = methods.create_empty_list_of_dicts(n)
-    for i in range(2,  7108):  # 14):
+    for i in range(2, 7108):  # 14):
         if int(lines[i].split(',')[2]) in m[int(lines[i].split(',')[1])]:
             aux = m[int(lines[i].split(',')[1])].get(int(lines[i].split(',')[2]))
             m[int(lines[i].split(',')[1])][int(lines[i].split(',')[2])] = aux + float(lines[i].split(',')[0])
@@ -78,7 +78,7 @@ print("sorted A + B", "\n", sorted_aplusb, "\n")
 
 # memorare matricea aplusb
 with open("aplusb.txt", 'r') as f:
-# with open("aplusbTestCase.txt", 'r') as f:
+    # with open("aplusbTestCase.txt", 'r') as f:
     lines = f.readlines()
     n = int(lines[0])
     aplusb_din_fisier = methods.create_empty_list_of_dicts(n)
@@ -88,8 +88,7 @@ with open("aplusb.txt", 'r') as f:
 print("A + B din fisier: ", "\n", aplusb_din_fisier)
 
 # verificare adunare
-verificare1=methods.equal(aplusb_din_fisier, sorted_aplusb)
-
+verificare1 = methods.equal(aplusb_din_fisier, sorted_aplusb)
 
 # inmultirea matricelor A * B
 aorib = copy.deepcopy(m)
@@ -128,7 +127,6 @@ for i in range(0, len(aorib)):
         aorib[i].update({j: suma})
         # aorib[i][j] = suma
 
-
 # for i in range(0, len(m1)):
 #     for j in m1[i].keys():
 #         suma = 0
@@ -140,7 +138,6 @@ for i in range(0, len(aorib)):
 #             suma += prod
 #         if aorib[i][j] == 0.0:
 #             aorib[i].update({j: suma})
-
 
 
 # X = [[102.5, 0, 2.5, 0, 0],
@@ -175,13 +172,15 @@ with open("aorib.txt", 'r') as f:
     lines = f.readlines()
     n = int(lines[0])
     aorib_din_fisier = methods.create_empty_list_of_dicts(n)
-    for i in range(2, 21285):
+    for i in range(2, 21285):  # 23):
         aorib_din_fisier[int(lines[i].split(',')[1])][int(lines[i].split(',')[2])] = float(lines[i].split(',')[0])
 
 print("A * B din fisier: ", "\n", aorib_din_fisier)
 
-verificare2=methods.equal(aorib, aorib_din_fisier)
+verificare2 = methods.equal(aorib, aorib_din_fisier)
 
-methods.gui_interface_citire("Citirea matricilor rare","Matricea A","Cei 3 vectori ai matricii B",m,(a,b,c))
-methods.gui_interface_operatii("Adunarea matricilor rare","Matricea A+B","Rezultatul din fisier",aplusb,aplusb_din_fisier,verificare1)
-methods.gui_interface_operatii("Inmultirea matricilor rare","Matricea A*B","Rezultatul din fisier",aorib,aorib_din_fisier,verificare2)
+methods.gui_interface_citire("Citirea matricilor rare", "Matricea A", "Cei 3 vectori ai matricii B", m, (a, b, c))
+methods.gui_interface_operatii("Adunarea matricilor rare", "Matricea A+B", "Rezultatul din fisier", aplusb,
+                               aplusb_din_fisier, verificare1)
+methods.gui_interface_operatii("Inmultirea matricilor rare", "Matricea A*B", "Rezultatul din fisier", aorib,
+                               aorib_din_fisier, verificare2)
