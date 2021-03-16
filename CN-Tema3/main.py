@@ -21,6 +21,7 @@ with open("b.txt", 'r') as f:
 # print("b: ", len(b), b, "\n")
 # print("c: ", len(c), c, "\n")
 
+
 # memorare matricea a
 with open("a.txt", 'r') as f:
     lines = f.readlines()
@@ -35,7 +36,8 @@ with open("a.txt", 'r') as f:
 
 # print("m: ", len(m), m, "\n")
 
-# adunarea matricelor A+B
+
+# adunarea matricelor A + B
 aplusb = copy.deepcopy(m)
 for i in range(0, len(aplusb)):
     for j in aplusb[i].keys():
@@ -69,10 +71,12 @@ for i in range(0, len(c)):
 
 # print("A + B: ", "\n", aplusb, "\n")
 
+
 # sortare apusb
 sorted_aplusb = methods.sort_matrix(aplusb)
 
 # print("sorted A + B", "\n", sorted_aplusb, "\n")
+
 
 # memorare matricea aplusb
 with open("aplusb.txt", 'r') as f:
@@ -84,60 +88,34 @@ with open("aplusb.txt", 'r') as f:
 
 # print("A + B din fisier: ", "\n", methods.sort_matrix(aplusb_din_fisier))
 
+
 # verificare adunare
 verificare1 = methods.equal(aplusb_din_fisier, sorted_aplusb)
 
+
 # inmultirea matricelor A * B
-aorib = copy.deepcopy(m)
-aorib = methods.sort_matrix(aorib)
-m1 = methods.create_empty_list_of_dicts(n)
-for i in range(0, len(m1)):
-    for j in range(0, len(m1)):
-        if i == j:
-            m1[i][j] = a[i]
-        if j - i == q:
-            m1[i][j] = b[i]
-        if i - j == p:
-            m1[i][j] = c[j]
-# print("A: ", "\n", m)
-# print("B: ", "\n", m1)
-
-# for i in range(0, len(aorib)):
-#     for j in set(range(0, n)) - set(aorib[i].keys()):
-#         aorib[i][j] = 0.0
-
-for i in range(0, len(aorib)):
-    for j in aorib[i].keys():
+aorib = methods.create_empty_list_of_dicts(n)
+for i in range(0, len(m)):
+    for j in range(0, len(m)):
         suma = 0
-        for l in m1[j].keys():
-            prod = 0
-            if j != l:
-                continue
-            for k in range(0, len(m1)):
-                if j == l == k:
-                    prod = aorib[i][j] * m1[k][l]
-                # if j-l == q == k:
-                #     prod = aorib[i][j] * m1[k][l]
-                # if l-j == l == k:
-                #     prod = aorib[i][j] * m1[k][l]
-            suma += prod
-        aorib[i].update({j: suma})
-        # aorib[i][j] = suma
-
-# for i in range(0, len(m1)):
-#     for j in m1[i].keys():
-#         suma = 0
-#         for l in aorib[j].keys():
-#             prod = 0
-#             for k in range(0, len(aorib)):
-#                 if j == l == k:
-#                     prod = m1[i][j] * aorib[k][l]
-#             suma += prod
-#         if aorib[i][j] == 0.0:
-#             aorib[i].update({j: suma})
-
+        for k in m[i].keys():
+            if k == j:
+                suma += m[i].get(k) * a[j]
+            if j - k == q:
+                if j >= q:
+                    suma += m[i].get(k) * b[j-q]
+                else:
+                    suma += 0
+            if k - j == p:
+                if j < len(c):
+                    suma += m[i].get(k) * c[j]
+                else:
+                    suma += 0
+        if suma != 0:
+            aorib[i].update({j: suma})
 
 # print("A * B: ", "\n", aorib)
+
 
 # memorare matricea aorib
 with open("aorib.txt", 'r') as f:
@@ -158,5 +136,3 @@ methods.gui_interface_operatii("Adunarea matricilor rare", "Matricea A+B", "Rezu
 methods.gui_interface_operatii("Inmultirea matricilor rare", "Matricea A*B", "Rezultatul din fisier",
                                methods.sort_matrix(aorib),
                                methods.sort_matrix(aorib_din_fisier), verificare2)
-# CHIN SI SUFERINTA
-# daca mai suntem capabile sa revenim la inm, face dictionar de dictionare

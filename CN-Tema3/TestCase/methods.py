@@ -35,6 +35,26 @@ def sort_matrix(a):
         sorted_aplusb.append(d)
     return sorted_aplusb
 
+def create_empty_dict_of_dicts(n):
+    # print("enter template")
+    matrix_template = {}
+    for i in range(0,n):
+        matrix_template[i]={}
+    # print("exit template")
+    return matrix_template
+
+def convert_vectors_in_sparse_matrix(a, b, c, n, q, p):
+    # print("enter convert")
+    matrix = create_empty_dict_of_dicts(n)
+    for i in matrix.keys():
+        for j in range(0, n):
+            if i == j:
+                matrix[i][j] = a[i]
+            if j - i == q:
+                matrix[i][j] = b[i]
+            if i - j == p:
+                matrix[i][j] = c[j]
+    return matrix
 
 def gui_interface_citire(text_ex=None, message1=None, message2=None, value1=None, value2=None):
     sg.theme('DarkPurple')

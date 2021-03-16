@@ -70,7 +70,7 @@ for i in range(0, len(c)):
 # sortare apusb
 sorted_aplusb = methods.sort_matrix(aplusb)
 
-print("A + B", "\n", sorted_aplusb, "\n")
+print("A + B", "\n", sorted_aplusb)
 
 # memorare matricea aplusb
 with open("aplusbTestCase.txt", 'r') as f:
@@ -80,41 +80,34 @@ with open("aplusbTestCase.txt", 'r') as f:
     for i in range(2, 18):
         aplusb_din_fisier[int(lines[i].split(',')[1])][int(lines[i].split(',')[2])] = float(lines[i].split(',')[0])
 
-print("A + B din fisier: ", "\n", aplusb_din_fisier)
+print("A + B din fisier: ", "\n", aplusb_din_fisier, "\n")
 
 # verificare adunare
 verificare1 = methods.equal(aplusb_din_fisier, sorted_aplusb)
 
 # inmultirea matricelor A * B
-aorib = copy.deepcopy(m)
-aorib = methods.sort_matrix(aorib)
-m1 = methods.create_empty_list_of_dicts(n)
-for i in range(0, len(m1)):
-    for j in range(0, len(m1)):
-        if i == j:
-            m1[i][j] = a[i]
-        if j - i == q:
-            m1[i][j] = b[i]
-        if i - j == p:
-            m1[i][j] = c[j]
-# print("A: ", "\n", m)
-# print("B: ", "\n", m1)
-
-
-for i in range(0, len(aorib)):
-    for j in aorib[i].keys():
+aorib = methods.create_empty_list_of_dicts(n)
+for i in range(0, len(m)):
+    for j in range(0, len(m)):
         suma = 0
-        for l in m1[j].keys():
-            prod = 0
-            if j != l:
-                continue
-            for k in range(0, len(m1)):
-                if j == l == k:
-                    prod = aorib[i][j] * m1[k][l]
-            suma += prod
-        aorib[i].update({j: suma})
+        for k in m[i].keys():
+            if k == j:
+                suma += m[i].get(k) * a[j]
+            if j - k == q:
+                if j >= q:
+                    suma += m[i].get(k) * b[j-q]
+                else:
+                    suma += 0
+            if k - j == p:
+                if j < len(c):
+                    suma += m[i].get(k) * c[j]
+                else:
+                    suma += 0
+        if suma != 0:
+            aorib[i].update({j: suma})
 
-print("A * B: ", "\n", aorib)
+
+print("A * B: ", "\n", methods.sort_matrix(aorib))
 
 # memorare matricea aorib
 with open("aoribTestCase.txt", 'r') as f:
@@ -128,13 +121,13 @@ print("A * B din fisier: ", "\n", aorib_din_fisier)
 
 verificare2 = methods.equal(aorib, aorib_din_fisier)
 
-methods.gui_interface_citire("Citirea matricilor rare", "Matricea A", "Cei 3 vectori ai matricii B", m, (a, b, c))
-methods.gui_interface_operatii("Adunarea matricilor rare", "Matricea A+B", "Rezultatul din fisier",
-                               methods.sort_matrix(aplusb),
-                               methods.sort_matrix(aplusb_din_fisier), verificare1)
-methods.gui_interface_operatii("Inmultirea matricilor rare", "Matricea A*B", "Rezultatul din fisier",
-                               methods.sort_matrix(aorib),
-                               methods.sort_matrix(aorib_din_fisier), verificare2)
+# methods.gui_interface_citire("Citirea matricilor rare", "Matricea A", "Cei 3 vectori ai matricii B", m, (a, b, c))
+# methods.gui_interface_operatii("Adunarea matricilor rare", "Matricea A+B", "Rezultatul din fisier",
+#                                methods.sort_matrix(aplusb),
+#                                methods.sort_matrix(aplusb_din_fisier), verificare1)
+# methods.gui_interface_operatii("Inmultirea matricilor rare", "Matricea A*B", "Rezultatul din fisier",
+#                                methods.sort_matrix(aorib),
+#                                methods.sort_matrix(aorib_din_fisier), verificare2)
 
 
 # X = [[102.5, 0, 2.5, 0, 0],
