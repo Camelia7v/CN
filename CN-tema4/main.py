@@ -58,24 +58,18 @@ f5_filename = "files/f5.txt"
 # f5 = methods.read_vector_from_file(f5_filename)
 
 
-
 # testCase din pdf
 a = methods.read_matrix_from_file("testCase/test.txt")
 f = methods.read_vector_from_file("testCase/f.txt")
 methods.verificare_posibilitate_calul(a[3])
-n=a[0]
-matrix = methods.convert_vectors_in_sparse_matrix(a[3][0],a[3][1],a[3][2],a[0],a[1],a[2])
-
-
-
-
-
-
+n = a[0]
+matrix = methods.convert_vectors_in_sparse_matrix(a[3][0], a[3][1], a[3][2], a[0], a[1], a[2])
 
 # initiere vector x
 x = [0.0 for j in range(n)]
 elem_a = 0.0
 print(matrix)
+
 
 def gauss_seidel(a, f, n):
     global x
@@ -89,10 +83,10 @@ def gauss_seidel(a, f, n):
     # conditiile de terminare
     while (k <= k_max) and (delta_x >= epsilon) and (delta_x <= 10 ** 8):
         norma = 0.0
-        for i in range(0,n):
+        for i in range(0, n):
             x_c = 0.0
             x_p = 0.0
-            #element nenul de pe a[i][i]
+            # element nenul de pe a[i][i]
             global elem_a
             x_final = 0.0
             # print(k)
@@ -111,17 +105,18 @@ def gauss_seidel(a, f, n):
             norma += pow(x_final - x[i], 2)
             x[i] = x_final
             delta_x = math.sqrt(norma)
-            k+=1
-    return k,delta_x
+            k += 1
+    return k, delta_x
 
 
 def xG_solutie(a, f, x, n):
-    gauss_seidel(a, f,n)
+    gauss_seidel(a, f, n)
     print("\nx: ")
     print(x)
-    norma_sol=methods.calcul_norma(a,f,x,n)
+    norma_sol = methods.calcul_norma(a, f, x, n)
     print("\nNorma: ")
     print(norma_sol)
     return
+
 
 xG_solutie(matrix, f, x, n)

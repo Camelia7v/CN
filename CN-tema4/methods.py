@@ -2,16 +2,15 @@ import math
 import numpy
 
 epsilon = 10 ** (-13)
+
+
 def create_empty_dict_of_dicts(n):
     # print("enter template")
     matrix_template = {}
-    for i in range(0,n):
-        matrix_template[i]={}
+    for i in range(0, n):
+        matrix_template[i] = {}
     # print("exit template")
     return matrix_template
-
-
-
 
 
 def read_matrix_from_file(filename):
@@ -80,21 +79,25 @@ def verificare_posibilitate_calul(matrix):
         exit()
     else:
         return
+
+
 def fill_with_zeros(n):
     return [0.0 for j in range(n)]
+
+
 def norma_vector(v):
     suma = sum(numpy.array([x * x for x in v]))
     norma = math.sqrt(suma)
     return norma
 
 
-def calcul_norma(a, x, f,n):
+def calcul_norma(a, x, f, n):
     # b = a*x
     x = numpy.array(x)
     b = fill_with_zeros(n)
-    for i in range(0,n):
+    for i in range(0, n):
         for j in a[i].keys():
             if 0 in a[j].keys():
-                 b[i] += a[j][0] * x[j]
+                b[i] += a[j][0] * x[j]
     z = numpy.array(numpy.subtract(b, f))
     return norma_vector(z)
