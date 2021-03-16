@@ -158,3 +158,5 @@ methods.gui_interface_operatii("Adunarea matricilor rare", "Matricea A+B", "Rezu
 methods.gui_interface_operatii("Inmultirea matricilor rare", "Matricea A*B", "Rezultatul din fisier",
                                methods.sort_matrix(aorib),
                                methods.sort_matrix(aorib_din_fisier), verificare2)
+#CHIN SI SUFERINTA
+#daca mai suntem capabile sa revenim la inm, face dictionar de dictionarii
