@@ -11,15 +11,16 @@ with open("bTestCase.txt", 'r') as f:
     for i in range(4, n + 4):
         a.append(float(lines[i][:-1]))
     b = list()
-    for i in range(n + 5, n + 5 + n - 1):
+    for i in range(n + 5, n + 5 + n - q):
         b.append(float(lines[i][:-1]))
     c = list()
-    for i in range(n + 5 + n - 1 + 1, n + 5 + n - 1 + 1 + n - 1):
+    for i in range(n + 5 + n - q + 1, n + 5 + n - q + 1 + n - p):
         c.append(float(lines[i][:-1]))
 
 print("a: ", len(a), a, "\n")
 print("b: ", len(b), b, "\n")
 print("c: ", len(c), c, "\n")
+
 
 # memorare matricea a
 with open("aTestCase.txt", 'r') as f:
@@ -35,7 +36,8 @@ with open("aTestCase.txt", 'r') as f:
 
 print("m: ", len(m), m, "\n")
 
-# adunarea matricelor A+B
+
+# adunarea matricelor A + B
 aplusb = copy.deepcopy(m)
 for i in range(0, len(aplusb)):
     for j in aplusb[i].keys():
@@ -67,10 +69,12 @@ for i in range(0, len(c)):
             aplusb[i + 1][i] = c[i]
             break
 
+
 # sortare apusb
 sorted_aplusb = methods.sort_matrix(aplusb)
 
 print("A + B", "\n", sorted_aplusb)
+
 
 # memorare matricea aplusb
 with open("aplusbTestCase.txt", 'r') as f:
@@ -82,8 +86,10 @@ with open("aplusbTestCase.txt", 'r') as f:
 
 print("A + B din fisier: ", "\n", aplusb_din_fisier, "\n")
 
+
 # verificare adunare
 verificare1 = methods.equal(aplusb_din_fisier, sorted_aplusb)
+
 
 # inmultirea matricelor A * B
 aorib = methods.create_empty_list_of_dicts(n)
@@ -106,8 +112,8 @@ for i in range(0, len(m)):
         if suma != 0:
             aorib[i].update({j: suma})
 
-
 print("A * B: ", "\n", methods.sort_matrix(aorib))
+
 
 # memorare matricea aorib
 with open("aoribTestCase.txt", 'r') as f:
@@ -119,15 +125,16 @@ with open("aoribTestCase.txt", 'r') as f:
 
 print("A * B din fisier: ", "\n", aorib_din_fisier)
 
+
 verificare2 = methods.equal(aorib, aorib_din_fisier)
 
-# methods.gui_interface_citire("Citirea matricilor rare", "Matricea A", "Cei 3 vectori ai matricii B", m, (a, b, c))
-# methods.gui_interface_operatii("Adunarea matricilor rare", "Matricea A+B", "Rezultatul din fisier",
-#                                methods.sort_matrix(aplusb),
-#                                methods.sort_matrix(aplusb_din_fisier), verificare1)
-# methods.gui_interface_operatii("Inmultirea matricilor rare", "Matricea A*B", "Rezultatul din fisier",
-#                                methods.sort_matrix(aorib),
-#                                methods.sort_matrix(aorib_din_fisier), verificare2)
+methods.gui_interface_citire("Citirea matricilor rare", "Matricea A", "Cei 3 vectori ai matricii B", m, (a, b, c))
+methods.gui_interface_operatii("Adunarea matricilor rare", "Matricea A+B", "Rezultatul din fisier",
+                               methods.sort_matrix(aplusb),
+                               methods.sort_matrix(aplusb_din_fisier), verificare1)
+methods.gui_interface_operatii("Inmultirea matricilor rare", "Matricea A*B", "Rezultatul din fisier",
+                               methods.sort_matrix(aorib),
+                               methods.sort_matrix(aorib_din_fisier), verificare2)
 
 
 # X = [[102.5, 0, 2.5, 0, 0],

@@ -9,7 +9,7 @@ def verifying_two_dictionaries(a, b):
     if len(a) != len(b):
         return False
     for i in a.keys():
-        if abs(a[i] - b[i]) > 10 ** (-8):
+        if abs(a[i] - b[i]) > 10 ** (-10):
             return False
     return True
 

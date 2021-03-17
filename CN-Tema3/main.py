@@ -11,10 +11,10 @@ with open("b.txt", 'r') as f:
     for i in range(4, n + 4):
         a.append(float(lines[i][:-1]))
     b = list()
-    for i in range(n + 5, n + 5 + n - 1):
+    for i in range(n + 5, n + 5 + n - q):
         b.append(float(lines[i][:-1]))
     c = list()
-    for i in range(n + 5 + n - 1 + 1, n + 5 + n - 1 + 1 + n - 1):
+    for i in range(n + 5 + n - q + 1, n + 5 + n - q + 1 + n - p):
         c.append(float(lines[i][:-1]))
 
 # print("a: ", len(a), a, "\n")
@@ -126,6 +126,7 @@ with open("aorib.txt", 'r') as f:
         aorib_din_fisier[int(lines[i].split(',')[1])][int(lines[i].split(',')[2])] = float(lines[i].split(',')[0])
 
 # print("A * B din fisier: ", "\n", aorib_din_fisier)
+
 
 verificare2 = methods.equal(aorib, aorib_din_fisier)
 

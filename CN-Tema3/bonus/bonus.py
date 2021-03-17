@@ -6,52 +6,73 @@ matrice: (pA, qA) şi (pB, qB).
 
 import methods
 
-# n,p,q,[a,b,c]
-set_matrix1 = methods.read_matrix_from_file("bTestCase.txt")
+set_matrix1 = methods.read_matrix_from_file("aTestCase.txt")
 set_matrix2 = methods.read_matrix_from_file("bTestCase.txt")
-matrix1 = set_matrix1[3]
-matrix2 = set_matrix2[3]
+aorib_din_fisier = methods.read_matrix("inm1TestCase.txt")
+
 n1 = set_matrix1[0]
 n2 = set_matrix2[0]
 p1 = set_matrix1[1]
-q1 = set_matrix2[2]
-p2 = set_matrix1[1]
+q1 = set_matrix1[2]
+p2 = set_matrix2[1]
 q2 = set_matrix2[2]
-matrix_rezultat = methods.read_matrix("inmTestCase.txt")
 
-a = list()
-b = list()
-c = list()
-aux = 0.0
+# prima matrice tridiagonala
+m = methods.convert_vectors_in_sparse_matrix(set_matrix1[3], set_matrix1[4], set_matrix1[5], n1, p1, q1)
 
-# indiferent de q si p, vectorii a vor contine mereu diagonalele principale
-for i in range(0, len(matrix1[0])):
-    for j in range(0, len(matrix2[0])):
-        aux = matrix1[0][i] * matrix2[0][j]
-    a.append(aux)
-aux = 0.0
-# ISSUE p1==q1 si p2==q2, DAR p1,p2 si respectiv q1,q2 POT fi diferite intre ele
-# celelalte diagonale in functie de p si q
-for i in range(0, len(matrix1[1])):
-    for j in range(0, len(matrix2[1])):
-        if i - j == p1:
-            aux = matrix1[1][i] * matrix2[1][j]
-        if j - i == q1:
-            aux = matrix1[1][i] * matrix2[1][j - 1]
-    b.append(aux)
-aux = 0.0
+# a doua matrice tridiagonala
+a = set_matrix2[3]
+b = set_matrix2[4]
+c = set_matrix2[5]
 
-for i in range(0, len(matrix1[2])):
-    for j in range(0, len(matrix2[2])):
-        if i - j == p2:
-            aux = matrix1[1][i] * matrix2[2][j]
-        if j - i == q2:
-            aux = matrix1[2][i] * matrix2[2][j - 1]
-    c.append(aux)
-rezultat = methods.convert_vectors_in_sparse_matrix(a, b, c, n1, q1, q2)
+# inmultirea a doua matrice tridiagonale
+aorib = methods.create_empty_list_of_dicts(n1)
+for i in range(0, len(m)):
+    for j in range(0, len(m)):
+        suma = 0
+        for k in m[i].keys():
+            if k == j:
+                suma += m[i].get(k) * a[j]
+            if j - k == q2:
+                if j >= q2:
+                    suma += m[i].get(k) * b[j - q2]
+                else:
+                    suma += 0
+            if k - j == p2:
+                if j < len(c):
+                    suma += m[i].get(k) * c[j]
+                else:
+                    suma += 0
+        if suma != 0:
+            aorib[i].update({j: suma})
 
-print("Matricea din fisier : ", matrix_rezultat)
-print("a : ", a)
-print("b : ", b)
-print("c : ", c)
-print("Matricea obtinuta : ", rezultat)
+print("A * B:            ", aorib)
+print("A * B din fisier: ", aorib_din_fisier)
+
+# verificare matrici
+verificare = methods.equal(aorib, aorib_din_fisier)
+print("\n", verificare)
+
+
+# X = [[102.5, 2.5, 0, 0, 0],
+#      [3.5, 104.88, 1.05, 0, 0],
+#      [0, 1.3, 100, 0.33, 0],
+#      [0, 0, 0.73, 101.3, 0],
+#      [0, 0, 0, 1.5, 102.23]
+#      ]
+# Y = [[102.5, 0, 2.5, 0, 0],
+#      [0, 104.88, 0, 1.05, 0],
+#      [3.5, 0, 100, 0, 0.33],
+#      [0, 1.3, 0, 101.3, 0],
+#      [0, 0, 0.73, 0, 102.23]
+#      ]
+#
+# result = [[0, 0, 0, 0, 0] for i in range(0, 5)]
+# # iterate through rows of X
+# for i in range(len(X)):
+#     # iterate through columns of Y
+#     for j in range(len(Y[0])):
+#         # iterate through rows of Y
+#         for k in range(len(Y)):
+#             result[i][j] += X[i][k] * Y[k][j]
+# print(result)
