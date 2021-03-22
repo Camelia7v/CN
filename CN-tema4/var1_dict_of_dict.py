@@ -13,8 +13,6 @@ import methods
 # un singur xG
 # memorare matricea b
 
-# TODO actually note: ultimele 2 au cele mai mici dimensiuni 2021,respectiv 2020
-# restul 60630, 40420, 20210,2021, 2020
 a1_filename = "files/a1.txt"
 a2_filename = "files/a2.txt"
 a3_filename = "files/a3.txt"
@@ -29,9 +27,9 @@ f5_filename = "files/f5.txt"
 
 #PERECHILE DE A si f
 
-# # 1
-# a1 = methods.read_matrix_from_file(a1_filename)
-# f1 = methods.read_vector_from_file(f1_filename)
+# 1
+a1 = methods.read_matrix_from_file(a1_filename)
+f1 = methods.read_vector_from_file(f1_filename)
 
 # # 2
 # a2 = methods.read_matrix_from_file(a2_filename)
@@ -41,24 +39,28 @@ f5_filename = "files/f5.txt"
 # # 3
 # a3 = methods.read_matrix_from_file(a3_filename)
 # f3 = methods.read_vector_from_file(f3_filename)
-
-# 4
-a4 = methods.read_matrix_from_file(a4_filename)
-f4 = methods.read_vector_from_file(f4_filename)
+#
+# # 4
+# a4 = methods.read_matrix_from_file(a4_filename)
+# f4 = methods.read_vector_from_file(f4_filename)
 #
 # # 5
 # a5 = methods.read_matrix_from_file(a5_filename)
 # f5 = methods.read_vector_from_file(f5_filename)
 
 # variabile globala a,n si f care iau valorile ai si fi
-a = copy.deepcopy(a4)
-f = copy.deepcopy(f4)
+a = copy.deepcopy(a1)
+f = copy.deepcopy(f1)
 methods.verificare_posibilitate_calul(a[3])
 n = a[0]
-print(n)
 # n, q, p, matrix
-matrix = methods.convert_vectors_in_sparse_matrix_list(a[3][0], a[3][1], a[3][2], a[0], a[1], a[2])
+matrix = methods.convert_vectors_in_sparse_matrix_dict(a[3][0], a[3][1], a[3][2], a[0], a[1], a[2])
+
+# initiere vector x
+x = [0.0 for j in range(n)]
+elem_a = 0.0
 print(matrix)
+
 
 def gauss_seidel(a, f, n):
     # initiere vector x
@@ -99,9 +101,8 @@ def gauss_seidel(a, f, n):
     return x
 
 
-def xG_solutie(a, f, n):
-
-    x = gauss_seidel(a, f,n)
+def xG_solutie(a, f, x, n):
+    gauss_seidel(a, f, n)
     print("\nx: ")
     print(x)
     norma_sol = methods.calcul_norma(a, f, x, n)
@@ -110,4 +111,4 @@ def xG_solutie(a, f, n):
     return
 
 
-xG_solutie(matrix, f, n)
+xG_solutie(matrix, f, x, n)

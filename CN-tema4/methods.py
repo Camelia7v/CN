@@ -12,6 +12,10 @@ def create_empty_dict_of_dicts(n):
     # print("exit template")
     return matrix_template
 
+def create_empty_list_of_dicts(n):
+    # print("exit template list")
+    return [{} for i in range(0, n)]
+
 
 def read_matrix_from_file(filename):
     with open(filename, 'r') as f:
@@ -35,7 +39,7 @@ def read_matrix_from_file(filename):
     return n, q, p, matrix
 
 
-def convert_vectors_in_sparse_matrix(a, b, c, n, q, p):
+def convert_vectors_in_sparse_matrix_dict(a, b, c, n, q, p):
     # print("enter convert")
     matrix = create_empty_dict_of_dicts(n)
     for i in matrix.keys():
@@ -46,8 +50,22 @@ def convert_vectors_in_sparse_matrix(a, b, c, n, q, p):
                 matrix[j][i] = b[i]
             if i - j == p:
                 matrix[j][i] = c[j]
+    # print("exit convert")
     return matrix
 
+def convert_vectors_in_sparse_matrix_list(a, b, c, n, q, p):
+    matrix = create_empty_list_of_dicts(n)
+    # print("enter convert")
+    for i in range(0, len(matrix)):
+        for j in range(0, len(matrix)):
+            if i == j:
+                matrix[j][i] = a[i]
+            if j - i == q:
+                matrix[j][i] = b[i]
+            if i - j == p:
+                matrix[j][i] = c[j]
+    # print("enter convert")
+    return matrix
 
 def read_vector_from_file(filename):
     with open(filename, 'r') as f:
