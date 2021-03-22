@@ -19,15 +19,17 @@ def gauss_seidel(a, f, n):
     norma = 0.0
     delta_x = 1
     # 10^(-p)
-    epsilon = 10 ** (-8)
+    epsilon = 10 ** (-4)
     k_max = 10000
     k = 0
 
     # conditiile de terminare
-    while (k <= k_max) and (delta_x >= epsilon) and (delta_x <= 10 ** 8):
+    while (k <= k_max) and (delta_x >= epsilon) and (delta_x <= 10 ** 4):
         norma = 0.0
+        print("K : ",k)
         for i in range(0, n):
-            # print("f : ", f[i])
+            print("i : ", i)
+            print("f : ", f[i])
             suma1 = 0.0
             suma2 = 0.0
             x_curent = 0.0
@@ -35,16 +37,19 @@ def gauss_seidel(a, f, n):
             # calcularea sumelor necesare pe baza formulei
             for j in a[i].keys():
                 if j == i - 1:
-                    # print("a : ", a[i][j])
-                    # print("x : ", x[j])
+                    print("suma1")
+                    print("j : ", j)
+                    print("a : ", a[i][j])
+                    print("x : ", x[j])
                     suma1 += x[j] * a[i][j]
                 if j == i + 1:
-                    # print("a : ", a[i][j])
-                    # print("x : ", x[j])
+                    print("suma2")
+                    print("j : ", j)
+                    print("a : ", a[i][j])
+                    print("x : ", x[j])
                     suma2 += a[i][j] * x[j]
                 if j == i:
-                    # print("elem_a: ", a[i][j])
-                    # print("x : ", x[j])
+                    print("_a: ", a[i][j])
                     elem_a += a[i][j]
             # calculate xi(k+1)
 
