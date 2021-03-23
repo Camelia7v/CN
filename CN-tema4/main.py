@@ -1,20 +1,17 @@
-import copy
-import math
-
 import methods
 
-# CERINTA 1
-# Sa se calculeze cu Gauss-Seidel solutia sistemului Ax=f
-# pt A =ai.txt si f=fi.txt
-# CERINTA 2
-# Sa se verifice soultia xG, cu norma  ||A*xG-f|| (se poate folosi si norma din biblioteca)
+"""
+CERINTA 1
+Sa se calculeze cu Gauss-Seidel solutia sistemului Ax=f
+pt A =ai.txt si f=fi.txt
 
-# A matrice rara
-# un singur xG
-# memorare matricea b
+CERINTA 2
+Sa se verifice soultia xG, cu norma ||A*xG - f|| (se poate folosi si norma din biblioteca)
+"""
 
-# TODO actually note: ultimele 2 au cele mai mici dimensiuni 2021,respectiv 2020
-# restul 60630, 40420, 20210,2021, 2020
+
+# valorile lui n1, n2, ..., n5: 60630, 40420, 20210, 2021, 2020
+
 a1_filename = "files/a1.txt"
 a2_filename = "files/a2.txt"
 a3_filename = "files/a3.txt"
@@ -27,87 +24,83 @@ f3_filename = "files/f3.txt"
 f4_filename = "files/f4.txt"
 f5_filename = "files/f5.txt"
 
-#PERECHILE DE A si f
+# PERECHILE DE a si f
 
 # # 1
 # a1 = methods.read_matrix_from_file(a1_filename)
 # f1 = methods.read_vector_from_file(f1_filename)
+#
+# methods.verificare_posibilitate_calul(a1[3])
+# n1 = a1[0]
+# print("n1: ", n1)
+# matrix = methods.convert_vectors_in_sparse_matrix_list(a1[3][0], a1[3][1], a1[3][2], a1[0], a1[1], a1[2])
+# # print("a1: ", matrix)
+# x1 = methods.gauss_seidel(matrix, f1, n1)
+# # print("x1: ", x1)
+# # print("f1: ", f1)
+# norma_sol1 = methods.calcul_norma(matrix, x1, f1, n1)
+# print("Norma 1: ", norma_sol1, "\n")
+
 
 # # 2
 # a2 = methods.read_matrix_from_file(a2_filename)
 # f2 = methods.read_vector_from_file(f2_filename)
 #
-#
+# methods.verificare_posibilitate_calul(a2[3])
+# n2 = a2[0]
+# print("n2: ", n2)
+# matrix = methods.convert_vectors_in_sparse_matrix_list(a2[3][0], a2[3][1], a2[3][2], a2[0], a2[1], a2[2])
+# # print("a2: ", matrix)
+# x2 = methods.gauss_seidel(matrix, f2, n2)
+# # print("x2: ", x2)
+# # print("f2: ", f2)
+# norma_sol2 = methods.calcul_norma(matrix, x2, f2, n2)
+# print("Norma 2: ", norma_sol2, "\n")
+
+
 # # 3
 # a3 = methods.read_matrix_from_file(a3_filename)
 # f3 = methods.read_vector_from_file(f3_filename)
+#
+# methods.verificare_posibilitate_calul(a3[3])
+# n3 = a3[0]
+# print("n3: ", n3)
+# matrix = methods.convert_vectors_in_sparse_matrix_list(a3[3][0], a3[3][1], a3[3][2], a3[0], a3[1], a3[2])
+# # print("a3: ", matrix)
+# x3 = methods.gauss_seidel(matrix, f3, n3)
+# # print("x3: ", x3)
+# # print("f3: ", f3)
+# norma_sol3 = methods.calcul_norma(matrix, x3, f3, n3)
+# print("Norma 3: ", norma_sol3, "\n")
+
 
 # 4
 a4 = methods.read_matrix_from_file(a4_filename)
 f4 = methods.read_vector_from_file(f4_filename)
-#
-# # 5
-# a5 = methods.read_matrix_from_file(a5_filename)
-# f5 = methods.read_vector_from_file(f5_filename)
 
-# variabile globala a,n si f care iau valorile ai si fi
-a = copy.deepcopy(a4)
-f = copy.deepcopy(f4)
-methods.verificare_posibilitate_calul(a[3])
-n = a[0]
-print(n)
-# n, q, p, matrix
-matrix = methods.convert_vectors_in_sparse_matrix_list(a[3][0], a[3][1], a[3][2], a[0], a[1], a[2])
-print(matrix)
-
-def gauss_seidel(a, f, n):
-    # initiere vector x
-    x = [0.0 for j in range(n)]
-    # element nenul de pe a[i][i]
-    elem_a = 0.0
-    norma = 0.0
-    delta_x = 1
-    # 10^(-p)
-    epsilon = 10 ** (-8)
-    k_max = 10000
-    k = 0
-
-    # conditiile de terminare
-    while (k <= k_max) and (delta_x >= epsilon) and (delta_x <= 10 ** 8):
-        norma = 0.0
-        for i in range(0, n):
-            suma1 = 0.0
-            suma2 = 0.0
-            x_curent = 0.0
-            # print(k)
-            # calcularea sumelor necesare pe baza formulei
-            for j in a[i].keys():
-                if j == i - 1:
-                    suma1 += x[j] * a[i][j]
-                elif j == i + 1:
-                    suma2 += a[i][j] * x[j]
-                if j == i:
-                    elem_a += a[i][j]
-            # calculate xi(k+1)
-            x_curent = (f[i] - suma1 - suma2) / elem_a
-            x[i] = x_curent
-
-            # calcul norma
-            norma += pow(x_curent - x[i], 2)
-            delta_x = math.sqrt(norma)
-            k += 1
-    return x
+methods.verificare_posibilitate_calul(a4[3])
+n4 = a4[0]
+print("n4: ", n4)
+matrix = methods.convert_vectors_in_sparse_matrix_list(a4[3][0], a4[3][1], a4[3][2], a4[0], a4[1], a4[2])
+print("a4: ", matrix)
+x4 = methods.gauss_seidel(matrix, f4, n4)
+print("x4: ", x4)
+print("f4: ", f4)
+norma_sol4 = methods.calcul_norma(matrix, x4, f4, n4)
+print("Norma 4: ", norma_sol4, "\n")
 
 
-def xG_solutie(a, f, n):
+# 5
+a5 = methods.read_matrix_from_file(a5_filename)
+f5 = methods.read_vector_from_file(f5_filename)
 
-    x = gauss_seidel(a, f,n)
-    print("\nx: ")
-    print(x)
-    norma_sol = methods.calcul_norma(a, f, x, n)
-    print("\nNorma: ")
-    print(norma_sol)
-    return
-
-
-xG_solutie(matrix, f, n)
+methods.verificare_posibilitate_calul(a5[3])
+n5 = a5[0]
+print("n5: ", n5)
+matrix = methods.convert_vectors_in_sparse_matrix_list(a5[3][0], a5[3][1], a5[3][2], a5[0], a5[1], a5[2])
+print("a5: ", matrix)
+x5 = methods.gauss_seidel(matrix, f5, n5)
+print("x5: ", x5)
+print("f5: ", f5)
+norma_sol5 = methods.calcul_norma(matrix, x5, f5, n5)
+print("Norma 5: ", norma_sol5)
