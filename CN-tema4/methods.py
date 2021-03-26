@@ -1,6 +1,6 @@
 import math
 import numpy
-
+import PySimpleGUI as sg
 epsilon = 10 ** (-13)
 
 
@@ -74,26 +74,29 @@ def fill_with_zeros(n):
     return [0.0 for j in range(n)]
 
 
-def norma_vector(v):
-    suma = sum(numpy.array([x * x for x in v]))
-    norma = math.sqrt(suma)
-    return norma
+# def norma_vector(v):
+#     suma = sum(numpy.array([x * x for x in v]))
+#     norma = math.sqrt(suma)
+#     return norma
 
 
 def calcul_norma(a, x, f, n):
     x = numpy.array(x)
     b = fill_with_zeros(n)
     # calculam b = a * x
-    for i in range(0, n):
+    for i in range(len(a)):
         suma = 0
         for k in a[i].keys():
             suma += a[i][k] * x[k]
-        b[i] = suma
+        b[i] = float("{:.4f}".format(abs(suma)))
     print("A * x ~= f:", "\n", b)
     # calculam z = b - f
     z = numpy.array(numpy.subtract(b, f))
+    indexes = [index for index in range(len(a)) if z[index] == 6663.2956]
+    print("z",list(z))
+    print("index",indexes)
     # return norma_vector(z)
-    return numpy.linalg.norm(max(abs(z)))
+    return numpy.linalg.norm(z,numpy.inf)
 
 
 def gauss_seidel(a, f, n):
@@ -106,7 +109,7 @@ def gauss_seidel(a, f, n):
     k = 0
 
     # conditiile de terminare
-    while (k <= k_max) and (delta_x >= epsilon) and (delta_x <= 10 ** 8):
+    while (k <= k_max) and (delta_x >= epsilon) and (delta_x <= 10 ** 13):
         elem_diag = 1.0
         for i in range(0, n):
             suma1 = 0.0
@@ -127,6 +130,80 @@ def gauss_seidel(a, f, n):
             norma = pow(x_curent - x_anterior, 2)
             delta_x = math.sqrt(norma)
 
-            x[i] = x_curent
+            x[i] = abs(x_curent)
             k += 1
     return x
+
+def write_solution_to_file(filename,x):
+    file = open(filename, "w")
+    for item in x:
+        file.write("%s\n" % item)
+    file.close()
+    print("Solutia ",filename," a fost memorata")
+    return
+
+def gui_interface_norme(solutii):
+    sg.theme('DarkPurple')
+    message="Normele solutiilor obtinute : \n"
+    message0="Solutia 1 : "
+    message1="Solutia 2 : "
+    message2="Solutia 3 : "
+    message3="Solutia 4 : "
+    message4="Solutia 5 : "
+
+    layout = [[sg.Text(message, justification='center')],
+              [sg.Text(message0, justification='center')],
+              [sg.Multiline(size=(105, 2), default_text=str(solutii[0]), font='courier 10', background_color='black',
+                            text_color='white')],
+              [sg.Text(message1, justification='center')],
+              [sg.Multiline(size=(105, 2), default_text=str(solutii[1]), font='courier 10', background_color='black',
+                            text_color='white')],
+              [sg.Text(message2, justification='center')],
+              [sg.Multiline(size=(105, 2), default_text=str(solutii[2]), font='courier 10', background_color='black',
+                            text_color='white')],
+              [sg.Text(message3, justification='center')],
+              [sg.Multiline(size=(105, 2), default_text=str(solutii[3]), font='courier 10', background_color='black',
+                            text_color='white')],
+              [sg.Text(message4, justification='center')],
+              [sg.Multiline(size=(105, 2), default_text=str(solutii[4]), font='courier 10', background_color='black',
+                            text_color='white')],
+              [sg.Button("Close")]]
+
+    # Create the window
+    window = sg.Window("Tema 4 - CN", layout, size=(800, 600))
+
+    # Create an event loop
+    while True:
+        event, values = window.read()
+        # End program if user closes window or
+        # presses the OK button
+        if event == "Close" or event == sg.WIN_CLOSED:
+            break
+    layout.clear()
+    window.close()
+
+def gui_interface_bonus(solutie,norma):
+    sg.theme('DarkPurple')
+    message="Solutie bounus"
+    message0="Normele solutiei obtinute : \n"
+
+    layout = [[sg.Text(message, justification='center')],
+              [sg.Multiline(size=(105, 2), default_text=str(solutie), font='courier 10', background_color='black',
+                            text_color='white')],
+              [sg.Text(message0, justification='center')],
+              [sg.Multiline(size=(105, 2), default_text=str(norma), font='courier 10', background_color='black',
+                            text_color='white')],
+              [sg.Button("Close")]]
+
+    # Create the window
+    window = sg.Window("Tema 4 - Bonus", layout, size=(800, 300))
+
+    # Create an event loop
+    while True:
+        event, values = window.read()
+        # End program if user closes window or
+        # presses the OK button
+        if event == "Close" or event == sg.WIN_CLOSED:
+            break
+    layout.clear()
+    window.close()
