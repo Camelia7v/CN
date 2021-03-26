@@ -53,7 +53,13 @@ def read_vector_from_file(filename):
             a.append(float(lines[i]))
     return a
 
-
+def read_vector_norm(filename):
+    a=list()
+    with open(filename, 'r') as f:
+        lines = f.readlines()
+        for i in range(0, 5):
+            a.append(float(lines[i]))
+    return a
 def check_diagonala(a):
     for i in range(len(a)):
         if abs(a[i]) < epsilon:

@@ -77,7 +77,7 @@ norme_solutii = list()
 # print("Norma 3: ", norma_sol3, "\n")
 # methods.write_solution_to_file("solutions/x3.txt",x3)
 # norme_solutii.append(norma_sol3)
-
+#
 # 4
 a4 = methods.read_matrix_from_file(a4_filename)
 f4 = methods.read_vector_from_file(f4_filename)
@@ -95,7 +95,7 @@ print("Norma 4: ", norma_sol4, "\n")
 methods.write_solution_to_file("solutions/x4.txt", x4)
 norme_solutii.append(norma_sol4)
 
-# 5
+5
 a5 = methods.read_matrix_from_file(a5_filename)
 f5 = methods.read_vector_from_file(f5_filename)
 
@@ -113,4 +113,5 @@ methods.write_solution_to_file("solutions/x5.txt", x5)
 norme_solutii.append(norma_sol5)
 
 # methods.write_solution_to_file("solutions/norme.txt",norme_solutii)
-# methods.gui_interface_norme(norme_solutii)
+norme_solutii = methods.read_vector_norm("solutions/norme.txt")
+methods.gui_interface_norme(norme_solutii)
