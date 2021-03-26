@@ -1,6 +1,7 @@
 import math
 import numpy
 import PySimpleGUI as sg
+
 epsilon = 10 ** (-13)
 
 
@@ -74,12 +75,6 @@ def fill_with_zeros(n):
     return [0.0 for j in range(n)]
 
 
-# def norma_vector(v):
-#     suma = sum(numpy.array([x * x for x in v]))
-#     norma = math.sqrt(suma)
-#     return norma
-
-
 def calcul_norma(a, x, f, n):
     x = numpy.array(x)
     b = fill_with_zeros(n)
@@ -88,20 +83,15 @@ def calcul_norma(a, x, f, n):
         suma = 0
         for k in a[i].keys():
             suma += a[i][k] * x[k]
-        b[i] = float("{:.4f}".format(abs(suma)))
+        b[i] = suma
     print("A * x ~= f:", "\n", b)
     # calculam z = b - f
     z = numpy.array(numpy.subtract(b, f))
-    indexes = [index for index in range(len(a)) if z[index] == 6663.2956]
-    print("z",list(z))
-    print("index",indexes)
-    # return norma_vector(z)
-    return numpy.linalg.norm(z,numpy.inf)
+    return numpy.linalg.norm(z, numpy.inf)
 
 
-def gauss_seidel(a, f, n):
+def gauss_seidel(a, f, n, p, q):
     # initiere vector x
-    # x = [float(i) for i in range(1, n+1)]
     x = [0.0] * n
     delta_x = 1
     epsilon = 10 ** (-13)
@@ -111,18 +101,20 @@ def gauss_seidel(a, f, n):
     # conditiile de terminare
     while (k <= k_max) and (delta_x >= epsilon) and (delta_x <= 10 ** 13):
         elem_diag = 1.0
+
         for i in range(0, n):
             suma1 = 0.0
             suma2 = 0.0
 
             # calcularea sumelor necesare pe baza formulei
             for j in a[i].keys():
-                if j == i - 1:
+                if j == i - p:
                     suma1 += x[j] * a[i][j]
-                elif j == i + 1:
+                elif j == i + q:
                     suma2 += a[i][j] * x[j]
                 if j == i:
                     elem_diag = a[i][j]
+
             x_curent = (f[i] - suma1 - suma2) / elem_diag
             x_anterior = x[i]
 
@@ -134,22 +126,24 @@ def gauss_seidel(a, f, n):
             k += 1
     return x
 
-def write_solution_to_file(filename,x):
+
+def write_solution_to_file(filename, x):
     file = open(filename, "w")
     for item in x:
         file.write("%s\n" % item)
     file.close()
-    print("Solutia ",filename," a fost memorata")
+    print("\nSolutia ", filename, " a fost memorata\n")
     return
+
 
 def gui_interface_norme(solutii):
     sg.theme('DarkPurple')
-    message="Normele solutiilor obtinute : \n"
-    message0="Solutia 1 : "
-    message1="Solutia 2 : "
-    message2="Solutia 3 : "
-    message3="Solutia 4 : "
-    message4="Solutia 5 : "
+    message = "Normele solutiilor obtinute : \n"
+    message0 = "Solutia 1 : "
+    message1 = "Solutia 2 : "
+    message2 = "Solutia 3 : "
+    message3 = "Solutia 4 : "
+    message4 = "Solutia 5 : "
 
     layout = [[sg.Text(message, justification='center')],
               [sg.Text(message0, justification='center')],
@@ -182,10 +176,11 @@ def gui_interface_norme(solutii):
     layout.clear()
     window.close()
 
-def gui_interface_bonus(solutie,norma):
+
+def gui_interface_bonus(solutie, norma):
     sg.theme('DarkPurple')
-    message="Solutie bounus"
-    message0="Normele solutiei obtinute : \n"
+    message = "Solutie bounus"
+    message0 = "Normele solutiei obtinute : \n"
 
     layout = [[sg.Text(message, justification='center')],
               [sg.Multiline(size=(105, 2), default_text=str(solutie), font='courier 10', background_color='black',
