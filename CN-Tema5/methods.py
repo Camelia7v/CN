@@ -2,6 +2,7 @@ import math
 import numpy
 import PySimpleGUI as gui
 
+
 def matricea_unitate(n):
     I_n = [[0] * n for i in range(n)]
     for i in range(n):
@@ -15,7 +16,7 @@ def calculeaza_p_q(A, n):
     maximum = 0
     p = 0
     q = 0
-    # se cauta doar in partea strict inferior triunghiulara a matricei
+    # se cauta doar in partea strict inferior/superior triunghiulara a matricei
     for i in range(n):
         for j in range(n):
             if i < j and abs(A[i][j]) >= maximum:
@@ -120,28 +121,29 @@ def factorizarea_choleski(A):
 
     L_numpy = numpy.linalg.cholesky(A)
     LT_numpy = numpy.transpose(L_numpy)
+    print(L_numpy, LT_numpy)
     A_0 = numpy.dot(L_numpy, LT_numpy)
 
-    # L_numpy = numpy.linalg.cholesky(A_0)
-    # LT_numpy = numpy.transpose(L_numpy)
     A_1 = numpy.dot(LT_numpy, L_numpy)
 
+    L_numpy = numpy.linalg.cholesky(A_1)
+    LT_numpy = numpy.transpose(L_numpy)
+    A_1 = numpy.dot(L_numpy, LT_numpy)
+
     while k <= k_max and numpy.linalg.norm(A_1 - A_0) > 10 ** (-8):
+        A_0 = numpy.dot(LT_numpy, L_numpy)
+
         L_numpy = numpy.linalg.cholesky(A_1)
         LT_numpy = numpy.transpose(L_numpy)
         A_1 = numpy.dot(L_numpy, LT_numpy)
-
-        A_0 = numpy.dot(LT_numpy, L_numpy)
-
-        # L_numpy = numpy.linalg.cholesky(A_0)
-        # LT_numpy = numpy.transpose(L_numpy)
-        # A_1 = numpy.dot(L_numpy, LT_numpy)
 
         k = k + 1
     print("iteratie finala:", k)
     return A_1
 
-def gui_interface(dim,text_ex="", message="",  value1="", value2="", value3="",value4="", value5="",value6="", verificare=""):
+
+def gui_interface(dim, text_ex="", message="", value1="", value2="", value3="", value4="", value5="",
+                  value6="", verificare=""):
     gui.theme('DarkAmber')
     layout = [[gui.Text(message, justification='center')],
               [gui.Text(str(value1), justification='center')],
