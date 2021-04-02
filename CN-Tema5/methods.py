@@ -1,6 +1,6 @@
 import math
 import numpy
-
+import PySimpleGUI as gui
 
 def matricea_unitate(n):
     I_n = [[0] * n for i in range(n)]
@@ -140,3 +140,28 @@ def factorizarea_choleski(A):
         k = k + 1
     print("iteratie finala:", k)
     return A_1
+
+def gui_interface(dim,text_ex="", message="",  value1="", value2="", value3="",value4="", value5="",value6="", verificare=""):
+    gui.theme('DarkAmber')
+    layout = [[gui.Text(message, justification='center')],
+              [gui.Text(str(value1), justification='center')],
+              [gui.Text(str(value2), justification='center')],
+              [gui.Text(str(value3), justification='center')],
+              [gui.Text(str(value4), justification='center')],
+              [gui.Text(str(value5), justification='center')],
+              [gui.Text(str(value6), justification='center')],
+              [gui.Text(str(verificare), justification='center')],
+              [gui.Button("Close")]]
+
+    # Create the window
+    window = gui.Window(text_ex, layout, size=(800, dim))
+
+    # Create an event loop
+    while True:
+        event, values = window.read()
+        # End program if user closes window or
+        # presses the OK button
+        if event == "Close" or event == gui.WIN_CLOSED:
+            break
+    layout.clear()
+    window.close()

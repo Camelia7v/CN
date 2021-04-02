@@ -44,6 +44,9 @@ b = numpy.dot(U, lambdaa)
 norma = numpy.linalg.norm(a - b)
 print("Norma:", norma, "\n")
 
+methods.gui_interface(400,"Bulina 1","Metoda Jacobi",
+                      "\nMatricea initiala " + str(A_init), "\nMatricea Jacobi " + str(A),
+                      "\nMatricea A final " + str(A_final),"\nNorma "+ str(norma))
 
 """
 2. 
@@ -55,6 +58,8 @@ A = [[4, 2, 8],
      [8, 10, 21]]
 A_factorizat = methods.factorizarea_choleski(A)
 print(A_factorizat, "\n")
+methods.gui_interface(350,"Bulina 2","Factorizarea Choleski",
+                      "\nMatricea initiala " + str(A), "\nMatricea obtinuta " + str(A_factorizat))
 
 
 """
@@ -66,11 +71,20 @@ A = [[4, 2, 8],
      [8, 10, 21]]
 U, S, V = numpy.linalg.svd(A, full_matrices=True)
 print("Valorile singulare ale matricei, S:", S)
-print("Rangul matricei A:", numpy.linalg.matrix_rank(A))
-print("Numarul de conditionare al matricei:", numpy.linalg.cond(A))
+rank = numpy.linalg.matrix_rank(A)
+print("Rangul matricei A:", rank)
+cond = numpy.linalg.cond(A)
+print("Numarul de conditionare al matricei:", cond)
 A_I = numpy.linalg.pinv(A)
 print("Pseudoinversa Moore-Penrose a matricei:\n", A_I)
 AT = numpy.transpose(A)
 A_J = numpy.dot(numpy.linalg.inv(numpy.dot(AT, A)), AT)
 print("Pseudoinversa in sensul celor mai mici patrate:\n", A_J)
 print(numpy.linalg.norm(A_I - A_J))
+
+methods.gui_interface(500,"Bulina 3","Singular Value Decomposition",
+                      "\nMatricea initiala " + str(A), "\nValorile singulare ale matricei S:  " + str(S),
+                      "\nRangul matricei A: " + str(rank),"\nNumarul de conditionare al matricei: "+ str(cond),
+                      "\nPseudoinversa Moore-Penrose a matricei : " + str(A_I),
+                      "\nPseudoinversa in sensul celor mai mici patrate: " + str(A_J),
+                      "\nNorma A_I, A_J : "+ str(numpy.linalg.norm(A_I - A_J)))
