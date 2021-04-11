@@ -1,16 +1,34 @@
-# This is a sample Python script.
-
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+import methods
+import random
 
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+f = lambda x: x ** 2 - 12*x + 30
 
+print("!!! a must be smaller than b !!!")
+# primul exemplu din tema: a=1 si b=5
+a = int(input("Enter a: "))
+b = int(input("Enter b: "))
+n = int(input("Enter n: "))
+x = [0.0] * (n + 1)
+x[0] = a
+x[n] = b
+for i in range(1, n):
+    rand_nr = round(random.uniform(x[i - 1], x[n]), 4)
+    if rand_nr == x[i-1]:
+        x[i] = round(random.uniform(x[i - 1], x[n]), 4)
+    else:
+        x[i] = rand_nr
+print("x:", x)
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
+y = list()
+for i in range(n+1):
+    y.append(f(x[i]))
+print("y:", y)
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+x_barat = round(random.uniform(x[0], x[n]), 2)
+while True:
+    if x_barat not in x:
+        break
+    else:
+        x_barat = round(random.uniform(x[0], x[n]), 2)
+print("x_barat:", x_barat)
