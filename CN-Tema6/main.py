@@ -36,3 +36,10 @@ while True:
     else:
         x_barat = round(random.uniform(x[0], x[n]), 2)
 print("x_barat:", x_barat)
+
+m = 3
+print("m:", m)
+
+print("aproximarea lui f(x_barat) =", methods.metoda_celor_mai_mici_patrate(x_barat, x, y, n, m))
+
+# print(methods.horner_method([1, -12, 30], 0))
