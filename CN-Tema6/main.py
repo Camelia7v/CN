@@ -2,13 +2,17 @@ import methods
 import random
 
 
-f = lambda x: x ** 2 - 12*x + 30
+"""
+Primul exemplu din tema
+ a=1 si b=5
+"""
+f = lambda x: x ** 2 - 12 * x + 30
 
 print("!!! a must be smaller than b !!!")
-# primul exemplu din tema: a=1 si b=5
 a = int(input("Enter a: "))
 b = int(input("Enter b: "))
 n = int(input("Enter n: "))
+
 x = [0.0] * (n + 1)
 x[0] = a
 x[n] = b
