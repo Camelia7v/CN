@@ -25,12 +25,16 @@ def metoda_celor_mai_mici_patrate(x_barat, x, y, n, m):
     for i in range(m + 1):
         suma = 0
         for k in range(n + 1):
-            suma += x[k] ** i * y[k]
+            suma += (x[k] ** i) * y[k]
         f[i] = suma
-    B = numpy.array(B)
-    f = numpy.array(f)
+    # print("B:", B, B[0][0], "\n")
+    # B = numpy.array(B)
+    # f = numpy.array(f)
     a = numpy.linalg.solve(B, f)
+    # print(numpy.allclose(numpy.dot(B, a), f))
     # a = numpy.array(a)
-    # print("a:", a, float(a[1]))
+    print("B:", B)
+    print("a:", a, a[0])
+    print("f:", f)
     f_de_x_barat = horner_method(a, x_barat)
     return f_de_x_barat
