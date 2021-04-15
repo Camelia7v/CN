@@ -1,4 +1,5 @@
 import numpy
+import PySimpleGUI as gui
 
 
 def horner_method(polinom, x):
@@ -52,3 +53,74 @@ def spline_patratice(x_barat, f_derivat_de_a, x, y, n):
         if x[i] < x_barat < x[i+1]:
             S_de_x_barat = (A[i+1] - A[i]) / (2 * h[i]) * ((x_barat - x[i]) ** 2) + A[i] * (x_barat - x[i]) + y[i]
             return S_de_x_barat
+
+def start_interface(text_ex="", message=""):
+    gui.theme('DarkAmber')
+    layout = [[gui.Text("Enter values for a,b,n")],
+              [gui.Text("!!! a must be smaller than b !!!")],
+              [gui.Text('Enter a ', size=(15, 1)), gui.InputText()],
+              [gui.Text('Enter b', size=(15, 1)), gui.InputText()],
+              [gui.Text('Enter n', size=(15, 1)), gui.InputText()],
+              [gui.Button("Submit"), gui.Button("Close")]]
+
+    # Create the window
+    window = gui.Window(text_ex, layout, size=(800, 350))
+
+    # Create an event loop
+    while True:
+        event, values = window.read()
+        # End program if user closes window or
+        # presses the OK button
+        if event == "Close" or event == gui.WIN_CLOSED:
+            break
+        if event == "Submit":
+            break
+    layout.clear()
+    window.close()
+    return int(values[0]), int(values[1]), int(values[2])
+
+def initial_set_up(text_ex="",message="", value_x=[], value_y=[], x_barat=0.0):
+    gui.theme('DarkAmber')
+    layout = [[gui.Text(message, justification='center')],
+              [gui.Text("x : ", justification='center')],
+              [gui.Text(str(value_x), justification='center')],
+              [gui.Text("y : ", justification='center')],
+              [gui.Text(str(value_y), justification='center')],
+              [gui.Text("x_barat : ", justification='center')],
+              [gui.Text(str(x_barat), justification='center')],
+              [gui.Button("Close")]]
+
+    # Create the window
+    window = gui.Window(text_ex, layout, size=(800, 350))
+
+    # Create an event loop
+    while True:
+        event, values = window.read()
+        # End program if user closes window or
+        # presses the OK button
+        if event == "Close" or event == gui.WIN_CLOSED:
+            break
+    layout.clear()
+    window.close()
+
+def cerinta_i(text_ex="", message="",message1="", aproximarea="",message2="", f_value="",message3="", dif="",message4="", sum=""):
+        gui.theme('DarkAmber')
+        layout = [[gui.Text(message, justification='center')],
+                  [gui.Text(message1 + str(aproximarea), justification='center')],
+                  [gui.Text(message2 + str(f_value), justification='center')],
+                  [gui.Text(message3 + str(dif), justification='center')],
+                  [gui.Text(message4 +str(sum), justification='center')],
+                  [gui.Button("Close")]]
+
+        # Create the window
+        window = gui.Window(text_ex, layout, size=(800, 350))
+
+        # Create an event loop
+        while True:
+            event, values = window.read()
+            # End program if user closes window or
+            # presses the OK button
+            if event == "Close" or event == gui.WIN_CLOSED:
+                break
+        layout.clear()
+        window.close()
