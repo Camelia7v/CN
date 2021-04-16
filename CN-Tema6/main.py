@@ -9,6 +9,7 @@ Primul exemplu din tema
  a=1 si b=5
 """
 f = lambda x: x ** 2 - 12 * x + 30
+# f = lambda x: 2 * (x ** 3) - 3 * x + 15
 
 userInput = methods.start_interface("Setare valori initiale")
 a = userInput[0]
@@ -88,7 +89,7 @@ methods.cerinta_i("Tema 6", "Cerinta 2 ", "f'(a) = ", f_derivat_de_a, "S(x_barat
 
 
 """
-BONUS 
+BONUS
 """
 x1 = np.arange(a, b, 0.01)
 y1 = x1 ** 2 - 12 * x1 + 30

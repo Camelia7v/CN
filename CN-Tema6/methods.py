@@ -5,7 +5,7 @@ import PySimpleGUI as gui
 def horner_method(polinom, x):
     rezultat = polinom[0]
     for i in range(1, len(polinom)):
-        rezultat = rezultat * x + polinom[i]
+        rezultat = rezultat * numpy.float64(x) + polinom[i]
     return rezultat
 
 
@@ -13,18 +13,18 @@ def metoda_celor_mai_mici_patrate(x_barat, x, y, n, m):
     """
     Interpolare prin metoda celor mai mici patrate.
     """
-    B = [[0 for i in range(n + 1)] for j in range(n + 1)]
-    for i in range(n + 1):
-        for j in range(n + 1):
+    B = [[0 for i in range(m + 1)] for j in range(m + 1)]
+    for i in range(m + 1):
+        for j in range(m + 1):
             suma = 0
-            for k in range(m + 1):
+            for k in range(n + 1):
                 suma += x[k] ** (i + j)
             B[i][j] = suma
 
-    f = [0 for i in range(n + 1)]
-    for i in range(n + 1):
+    f = [0 for i in range(m + 1)]
+    for i in range(m + 1):
         suma = 0
-        for k in range(m + 1):
+        for k in range(n + 1):
             suma += (x[k] ** i) * y[k]
         f[i] = suma
 
@@ -58,7 +58,7 @@ def start_interface(text_ex="", message=""):
               [gui.Button("Submit"), gui.Button("Close")]]
 
     # Create the window
-    window = gui.Window(text_ex, layout, size=(800, 350))
+    window = gui.Window(text_ex, layout, size=(650, 300))
 
     # Create an event loop
     while True:
@@ -77,16 +77,13 @@ def start_interface(text_ex="", message=""):
 def initial_set_up(text_ex="", message="", value_x=[], value_y=[], x_barat=0.0):
     gui.theme('DarkAmber')
     layout = [[gui.Text(message, justification='center')],
-              [gui.Text("x : ", justification='center')],
-              [gui.Text(str(value_x), justification='center')],
-              [gui.Text("y : ", justification='center')],
-              [gui.Text(str(value_y), justification='center')],
-              [gui.Text("x_barat : ", justification='center')],
-              [gui.Text(str(x_barat), justification='center')],
+              [gui.Text("x : " + str(value_x), justification='center')],
+              [gui.Text("y : " + str(value_y), justification='center')],
+              [gui.Text("x_barat : " + str(x_barat), justification='center')],
               [gui.Button("Close")]]
 
     # Create the window
-    window = gui.Window(text_ex, layout, size=(800, 350))
+    window = gui.Window(text_ex, layout, size=(650, 300))
 
     # Create an event loop
     while True:
@@ -121,3 +118,4 @@ def cerinta_i(text_ex="", message="", message1="", aproximarea="", message2="", 
             break
     layout.clear()
     window.close()
+
