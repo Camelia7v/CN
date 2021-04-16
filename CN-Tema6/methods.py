@@ -13,46 +13,40 @@ def metoda_celor_mai_mici_patrate(x_barat, x, y, n, m):
     """
     Interpolare prin metoda celor mai mici patrate.
     """
-    # rezolvarea sistemului liniar B*a = f
-
-    B = [[0 for i in range(m + 1)] for j in range(m + 1)]
-    for j in range(m + 1):
-        for i in range(m + 1):
+    B = [[0 for i in range(n + 1)] for j in range(n + 1)]
+    for i in range(n + 1):
+        for j in range(n + 1):
             suma = 0
-            for k in range(n + 1):
+            for k in range(m + 1):
                 suma += x[k] ** (i + j)
             B[i][j] = suma
-    f = [0 for i in range(m + 1)]
-    for i in range(m + 1):
+
+    f = [0 for i in range(n + 1)]
+    for i in range(n + 1):
         suma = 0
-        for k in range(n + 1):
+        for k in range(m + 1):
             suma += (x[k] ** i) * y[k]
         f[i] = suma
-    # print("B:", B, B[0][0], "\n")
-    # B = numpy.array(B)
-    # f = numpy.array(f)
-    a = numpy.linalg.solve(B, f)
-    # print(numpy.allclose(numpy.dot(B, a), f))
-    # a = numpy.array(a)
 
-    # print("B:", B)
-    # print("a:", a, a[0])
-    # print("f:", f)
+    # rezolvarea sistemului liniar B*a = f
+    a = numpy.linalg.solve(B, f)
     f_de_x_barat = horner_method(a, x_barat)
+
     return f_de_x_barat
 
 
 def spline_patratice(x_barat, f_derivat_de_a, x, y, n):
-    h = [0 for i in range(n+1)]
-    A = [0 for i in range(n+1)]
+    h = [0 for i in range(n + 1)]
+    A = [0 for i in range(n + 1)]
     A[0] = f_derivat_de_a
     for i in range(n):
-        h[i] = x[i+1] - x[i]
-        A[i+1] = -A[i] + (2 * (y[i+1] - y[i])) / h[i]
+        h[i] = x[i + 1] - x[i]
+        A[i + 1] = -A[i] + (2 * (y[i + 1] - y[i])) / h[i]
     for i in range(n):
-        if x[i] < x_barat < x[i+1]:
-            S_de_x_barat = (A[i+1] - A[i]) / (2 * h[i]) * ((x_barat - x[i]) ** 2) + A[i] * (x_barat - x[i]) + y[i]
+        if x[i] < x_barat < x[i + 1]:
+            S_de_x_barat = (A[i + 1] - A[i]) / (2 * h[i]) * ((x_barat - x[i]) ** 2) + A[i] * (x_barat - x[i]) + y[i]
             return S_de_x_barat
+
 
 def start_interface(text_ex="", message=""):
     gui.theme('DarkAmber')
@@ -79,7 +73,8 @@ def start_interface(text_ex="", message=""):
     window.close()
     return int(values[0]), int(values[1]), int(values[2])
 
-def initial_set_up(text_ex="",message="", value_x=[], value_y=[], x_barat=0.0):
+
+def initial_set_up(text_ex="", message="", value_x=[], value_y=[], x_barat=0.0):
     gui.theme('DarkAmber')
     layout = [[gui.Text(message, justification='center')],
               [gui.Text("x : ", justification='center')],
@@ -103,24 +98,26 @@ def initial_set_up(text_ex="",message="", value_x=[], value_y=[], x_barat=0.0):
     layout.clear()
     window.close()
 
-def cerinta_i(text_ex="", message="",message1="", aproximarea="",message2="", f_value="",message3="", dif="",message4="", sum=""):
-        gui.theme('DarkAmber')
-        layout = [[gui.Text(message, justification='center')],
-                  [gui.Text(message1 + str(aproximarea), justification='center')],
-                  [gui.Text(message2 + str(f_value), justification='center')],
-                  [gui.Text(message3 + str(dif), justification='center')],
-                  [gui.Text(message4 +str(sum), justification='center')],
-                  [gui.Button("Close")]]
 
-        # Create the window
-        window = gui.Window(text_ex, layout, size=(800, 350))
+def cerinta_i(text_ex="", message="", message1="", aproximarea="", message2="", f_value="", message3="", dif="",
+              message4="", sum=""):
+    gui.theme('DarkAmber')
+    layout = [[gui.Text(message, justification='center')],
+              [gui.Text(message1 + str(aproximarea), justification='center')],
+              [gui.Text(message2 + str(f_value), justification='center')],
+              [gui.Text(message3 + str(dif), justification='center')],
+              [gui.Text(message4 + str(sum), justification='center')],
+              [gui.Button("Close")]]
 
-        # Create an event loop
-        while True:
-            event, values = window.read()
-            # End program if user closes window or
-            # presses the OK button
-            if event == "Close" or event == gui.WIN_CLOSED:
-                break
-        layout.clear()
-        window.close()
+    # Create the window
+    window = gui.Window(text_ex, layout, size=(800, 350))
+
+    # Create an event loop
+    while True:
+        event, values = window.read()
+        # End program if user closes window or
+        # presses the OK button
+        if event == "Close" or event == gui.WIN_CLOSED:
+            break
+    layout.clear()
+    window.close()
