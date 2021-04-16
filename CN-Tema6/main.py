@@ -9,6 +9,7 @@ Primul exemplu din tema
  a=1 si b=5
 """
 f = lambda x: x ** 2 - 12 * x + 30
+# f = lambda x: 2 * (x ** 3) - 3 * x + 15
 
 # print("!!! a must be smaller than b !!!")
 # a = int(input("Enter a: "))
@@ -51,7 +52,7 @@ CERINTA 1
 print("\n CERINTA 1 \n")
 
 # Se vor folosi valori ale lui m mai mici ca 6.
-m = 3
+m = 5
 print("m:", m)
 
 P_de_x_barat = methods.metoda_celor_mai_mici_patrate(x_barat, x, y, n, m)
@@ -66,7 +67,7 @@ for i in range(n+1):
 print("Suma =", suma)
 
 
-# print(methods.horner_method([1, -12, 30], 0))
+print(methods.horner_method([1, -12, 30], 0))
 methods.cerinta_i("Tema 6","Cerinta 1 \n m:" + str(m) ,"P(x_barat), aproximarea lui f(x_barat) = ",P_de_x_barat,"f(x_barat) = ",f(x_barat), "|P(x_barat) - f(x_barat)| = ",dif, "Suma = ", suma)
 """
 CERINTA 2
@@ -87,7 +88,7 @@ dif2=abs(S_de_x_barat - f(x_barat))
 methods.cerinta_i("Tema 6","Cerinta 2 ","f'(a) = ",f_derivat_de_a,"S(x_barat), aproximarea lui f(x_barat) = ",S_de_x_barat,"f(x_barat) = ",f(x_barat),"|S(x_barat) - f(x_barat)| =",dif2)
 
 """
-BONUS 
+BONUS
 """
 x1 = np.arange(a, b, 0.01)
 y1 = x1 ** 2 - 12 * x1 + 30
