@@ -1,3 +1,4 @@
+import numpy
 import methods
 
 epsilon = 10 ** (-8)
@@ -19,7 +20,6 @@ while count < n * n:
     if k is not None:
         root = k[0]
         x0 = k[1]
-        print(roots)
         if len(roots) >= 1 and root not in roots and abs(roots[len(roots) - 1] - root) > epsilon:
             roots.append(root)
             x_0.append(x0)
@@ -42,7 +42,12 @@ while count < n * n:
 print("x0:", x_0)
 print("roots:", roots)
 
-f = open('exemplu1.txt', 'w')
-for x in roots:
-    f.write(str(x) + '\n')
-f.close()
+# f = open('exemplu1.txt', 'w')
+# for x in roots:
+#     f.write(str(x) + '\n')
+# f.close()
+
+p = a
+p1 = numpy.polyder(a)  # p'
+p2 = numpy.polyder(a, 2)  # p"
+print(methods.polynomials_gcd(p, p1, epsilon))
