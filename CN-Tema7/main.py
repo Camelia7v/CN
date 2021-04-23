@@ -24,16 +24,6 @@ while count < n:
             roots.append(root)
             x_0.append(x0)
             count += 1
-
-            # flag = 1
-            # for i in range(len(roots)):
-            #     if abs(roots[i] - root) < epsilon:
-            #         flag = 0
-            # if flag == 1:
-            #     roots.append(root)
-            #     x_0.append(x0)
-            #     count += 1
-
         elif len(roots) == 0:
             roots.append(root)
             x_0.append(x0)
@@ -41,7 +31,8 @@ while count < n:
 
 print("x0:", x_0)
 print("roots:", roots)
-methods.cerinta_interface("Tema 7","Intervalul [-R,R]: ", "["+str(-R)+ ","+ str(R)+"]", "x0 : ", x_0, "roots: ",roots)
+methods.cerinta_interface("Tema 7", "Intervalul [-R,R]: ", "[" + str(-R) + "," + str(R) + "]", "x0 : ", x_0, "roots: ",
+                          roots)
 
 # f = open('exemplu1.txt', 'w')
 # for x in roots:
@@ -52,12 +43,15 @@ methods.cerinta_interface("Tema 7","Intervalul [-R,R]: ", "["+str(-R)+ ","+ str(
 p = a
 p1 = numpy.polyder(a)  # p'
 p2 = numpy.polyder(a, 2)  # p"
+
 # 1
-gcd_value = methods.polynomials_gcd(p, p1, 2,epsilon)
-# # x-2
+gcd_value = methods.polynomials_gcd(p, p1, 2, epsilon)
+# x-2
 # gcd_value = methods.polynomials_gcd(p1, p2,0,epsilon)
-print(p)
-print(p1)
-print(p2)
+
+print("p:", p)
+print("p':", p1)
+print('p":', p2)
 print(gcd_value)
+
 # methods.bonus_interface("Bonus","Polinomul p' :", p1,"Polinomul p'' :", p2,"Rezultatul gcd:", gcd_value)

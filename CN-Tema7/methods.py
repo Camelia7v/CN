@@ -2,6 +2,7 @@ import random
 import numpy
 import PySimpleGUI as gui
 
+
 def calculeaza_intervalul(a):
     """
     Se calculeaza intervalul [−R, R] in care se gasesc toate radacinile reale ale polinomului P
@@ -26,10 +27,8 @@ def olver_method(p, R, epsilon):
     p2 = numpy.polyder(p, 2)  # p"
 
     # bonus
-    # q = polynomials_gcd(p, p1, 2, epsilon)
-    # p,r = numpy.polydiv(p, q)
-
-    print("P",p)
+    # q = polynomials_gcd(p, p1, 3, epsilon)
+    # p, r = numpy.polydiv(p, q)
 
     k = 0
     k_maxim = 1000
@@ -60,6 +59,7 @@ def polynomials_gcd(f, g, field, epsilon):
 
     r = [0] * len(f)
     r_mult = f[0] / g[0]
+
     for i in range(len(f)):
         if i < len(g):
             r[i] = f[i] - g[i] * r_mult
@@ -68,48 +68,22 @@ def polynomials_gcd(f, g, field, epsilon):
         if field != 0:
             r[i] %= field
 
-
-    # print('F',f)
-    # print('G',g)
-    # print('R',r)
     while abs(r[0]) < epsilon:
         r.pop(0)
         if len(r) == 0:
             return g
-    return polynomials_gcd(r, g,field, epsilon)
 
-# def polynomials_gcd(f, g, epsilon):
-#     if len(f) < len(g):
-#         return polynomials_gcd(g, f, epsilon)
-#
-#     r = [0] * len(f)
-#     # r_mult = 1 / g[0] * f[0]
-#     r_mult = f[0] / g[0]
-#     for i in range(len(f)):
-#         if i < len(g):
-#             r[i] = f[i] - g[i] * r_mult
-#         else:
-#             r[i] = f[i]
-#
-#
-#     print('F',f)
-#     print('G',g)
-#     print('R',r)
-#     while abs(r[0]) < epsilon:
-#         r.pop(0)
-#         if len(r) == 0:
-#             return g
-#     return polynomials_gcd(r, g, epsilon)
+    return polynomials_gcd(r, g, field, epsilon)
 
 
 def cerinta_interface(text_ex="", message="", value="", message1="", value1="", message2="", value2=""):
     gui.theme('DarkAmber')
     layout = [[gui.Text(message, justification='center')],
               [gui.Multiline(size=(105, 2), default_text=str(value), font='courier 10', background_color='black',
-                            text_color='white')],
+                             text_color='white')],
               [gui.Text(message1, justification='center')],
               [gui.Multiline(size=(105, 5), default_text=str(value1), font='courier 10',
-                            background_color='black', text_color='white')],
+                             background_color='black', text_color='white')],
               [gui.Text(message2, justification='center')],
               [gui.Multiline(size=(105, 5), default_text=str(value2), font='courier 10',
                              background_color='black', text_color='white')],
@@ -152,4 +126,3 @@ def bonus_interface(text_ex="", message="", value="", message1="", value1="", me
         if event == "Close" or event == gui.WIN_CLOSED:
             break
     window.close()
-
