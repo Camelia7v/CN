@@ -9,10 +9,10 @@ F = [1, -6, 13, -12, 4]
 
 
 i = 1
-x0 = random.uniform(-100, 100)
+x0 = random.uniform(-10, 10)
 x_stelat = methods.dehghan_hajarian_method(x0, F, i, h, epsilon)
 while x_stelat is None:
-    x0 = random.uniform(-100, 100)
+    x0 = random.uniform(-10, 10)
     x_stelat = methods.dehghan_hajarian_method(x0, F, i, h, epsilon)
 
 if methods.F_derivat_secund(F, x_stelat, h) > 0:

@@ -29,14 +29,14 @@ def F_derivat_secund(F, x, h):
 
 def dehghan_hajarian_method(x0, g, i, h, epsilon):
     """
-     Aproximarea unui punct critic al functiei F
+     Aproximarea unui punct critic al functiei g
      Punct critic: radacina a functiei g(x) = F'(x)
     """
     k = 0
     k_maxim = 1000
 
     x = x0
-    z = x + F_derivat_o_data(g, x, h, i) ** 2 / \
+    z = x + (F_derivat_o_data(g, x, h, i) ** 2) / \
         (F_derivat_o_data(g, x + F_derivat_o_data(g, x, h, i), h, i) - F_derivat_o_data(g, x, h, i))
     delta_x = (F_derivat_o_data(g, x, h, i) * (F_derivat_o_data(g, z, h, i) - F_derivat_o_data(g, x, h, i))) / \
               (F_derivat_o_data(g, x + F_derivat_o_data(g, x, h, i), h, i) - F_derivat_o_data(g, x, h, i))
@@ -46,7 +46,7 @@ def dehghan_hajarian_method(x0, g, i, h, epsilon):
             # convergenta
             print("Pentru x0 = %d, folosind G%d(x,h), obtinem un numar de %d iteratii." % (x0, i, k))
             return x
-        z = x + F_derivat_o_data(g, x, h, i) ** 2 / \
+        z = x + (F_derivat_o_data(g, x, h, i) ** 2) / \
             (F_derivat_o_data(g, x + F_derivat_o_data(g, x, h, i), h, i) - F_derivat_o_data(g, x, h, i))
         delta_x = (F_derivat_o_data(g, x, h, i) * (F_derivat_o_data(g, z, h, i) - F_derivat_o_data(g, x, h, i))) / \
                   (F_derivat_o_data(g, x + F_derivat_o_data(g, x, h, i), h, i) - F_derivat_o_data(g, x, h, i))
