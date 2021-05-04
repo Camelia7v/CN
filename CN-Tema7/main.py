@@ -54,4 +54,4 @@ print("p':", p1)
 print('p":', p2)
 print(gcd_value)
 
-# methods.bonus_interface("Bonus","Polinomul p' :", p1,"Polinomul p'' :", p2,"Rezultatul gcd:", gcd_value)
+methods.bonus_interface("Bonus","Polinomul p' :", p1,"Polinomul p'' :", p2,"Rezultatul gcd:", gcd_value)

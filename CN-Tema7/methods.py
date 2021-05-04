@@ -27,8 +27,8 @@ def olver_method(p, R, epsilon):
     p2 = numpy.polyder(p, 2)  # p"
 
     # bonus
-    # q = polynomials_gcd(p, p1, 3, epsilon)
-    # p, r = numpy.polydiv(p, q)
+    q = polynomials_gcd(p, p1, 3, epsilon)
+    p, r = numpy.polydiv(p, q)
 
     k = 0
     k_maxim = 1000
