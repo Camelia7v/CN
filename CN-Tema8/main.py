@@ -26,11 +26,11 @@ while x_stelat1 is None:
 
 if methods.F_derivat_secund(F, flag, x_stelat1, h) > 0:
     # print(methods.F_derivat_secund(F, flag, x_stelat1, h))
-    message1 = ("Punctul critic x* = %d calculat cu metoda Dehghan-Hajarian este punct de minim pentru functia F." % (x_stelat1))
+    message1 = ("Punctul critic x* = %f calculat cu metoda Dehghan-Hajarian este punct de minim pentru functia F." % (x_stelat1))
     print("Punctul critic x* =", x_stelat1,
           "calculat cu metoda Dehghan-Hajarian este punct de minim pentru functia F.")
 else:
-    message1 = ("Punctul critic x* = %d calculat cu metoda Dehghan-Hajarian NU este punct de minim pentru functia F!" % (x_stelat1))
+    message1 = ("Punctul critic x* = %f calculat cu metoda Dehghan-Hajarian NU este punct de minim pentru functia F!" % (x_stelat1))
     print("Punctul critic x* =", x_stelat1,
           "calculat cu metoda Dehghan-Hajarian NU este punct de minim pentru functia F!")
 print("\n")

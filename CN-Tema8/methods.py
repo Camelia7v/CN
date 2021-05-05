@@ -77,7 +77,7 @@ def dehghan_hajarian_method(x0, g, flag,i, h, epsilon):
         # divergenta
         return
 
-def cerinta_interface(x0=0.0, i1=0, k1=0, i2=0, k2=0,x_stelat1=0.0,x_stelat2=0.0, message1=None, message2=None):
+def cerinta_interface(x0=0.0, i1=0, i2=0, k1=0, k2=0,x_stelat1=0.0,x_stelat2=0.0, message1=None, message2=None):
     gui.theme('DarkPurple6')
     layout = [[gui.Text("\n" + ("Pentru x0 = %d, folosind G%d(x,h),\n obtinem un numar de %d iteratii." % (x0, i1, k1)), justification='center')],
               [gui.Text(message1+"\n", justification='center')],
